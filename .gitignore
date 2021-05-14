@@ -1,0 +1,4 @@
+.Rproj.user
+vignette/*_cache
+vignette/*_files
+doc/
