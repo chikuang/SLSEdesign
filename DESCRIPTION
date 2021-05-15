@@ -6,10 +6,10 @@ Authors@R:
            family = "Yeh",
            role = c("aut", "cre"),
            email = "chi-kuang.yeh@uwaterloo.ca",
-           comment = c(ORCID = "YOUR-ORCID-ID")),
+           comment = c(ORCID = "0000-0001-7057-2096")),
       person(given = "Julie",
            family = "Zhou",
-           role = "aut"))
+           role = c("aut", "ctb")))
 Description: With given input including number of points, design space, measure skewness, models and parameter value, this package calculates the objective value, probability measures and plot the equivalence theory for A- and D- optimal designs under the second-order least squares estimator.
 License: GPL-3
 Encoding: UTF-8
@@ -17,12 +17,13 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
-    CVXR (>= 1.0.0),
-    dplyr (>= 0.8.4),
+    CVXR,
+    dplyr,
     tibble,
     pracma,
     graphics
 Suggests: 
     knitr,
-    kableExtra
+    rmarkdown,
+    gridExtra
 VignetteBuilder: knitr
