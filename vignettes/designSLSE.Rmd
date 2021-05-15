@@ -1,0 +1,121 @@
+---
+title: "Optimal Design under Second-order Least Squares Estimator"
+author: | 
+  | Chi-Kuang Yeh and Julie Zhou
+  | University of Waterloo and University of Victoria
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: yes
+  rmarkdown::html_document:
+    toc: yes
+    toc_float: true
+    theme: readable
+    highlight: tango
+vignette: >
+  %\VignetteIndexEntry{designSLSE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!-- latex macros -->
+\newcommand{\cv}{\operatorname{cv}}
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  cache = TRUE
+)
+options(digits = 3)
+```
+
+# Installation
+
+```{r load package}
+# required dependencies
+require(designSLSE)
+require(CVXR)
+require(tibble)
+require(dplyr)
+require(pracma)
+require(gridExtra)
+```
+
+# Specify the input for the program
+
+1. **N**: Number of design points
+
+2. **S**: The design space
+
+3. **tt**: The level of skewness
+
+4. **$\theta$**: The parameter vector
+
+5. **FUN**: The function for calculating the derivatives of the given model
+
+```{r Define inputs, cache = TRUE}
+N <- 101
+S <- c(0, 180)
+tt <- 0
+theta <- c(0.05, 0.5)
+
+FUN <- function(xi, theta){
+  deno <- (theta[1] + xi * theta[2])^2
+  rbind(-xi/deno, -xi^2/deno)
+}
+
+u <- seq(from = S[1], to = S[2], length.out = N)
+
+res <- Aopt(N = N, u = u, tt = tt, FUN = FUN, 
+            theta = theta)
+
+```
+
+
+# Manage the outputs
+
+## Showing the support points 
+
+```{r output}
+res$design %>% filter(weight > 1E-4)
+
+```
+
+## Now we want to plot the weights
+```{r weight}
+plot_weight(res$design)
+```
+
+## Plot the directional derivative to use the equivalence theorem
+
+
+```{r directional}
+calc_A <- function(theta, FUN, design){
+  
+  u <- design$location
+  w_hat <- design$weight
+  n <- length(theta)
+  g1 <- matrix(0, n, 1)
+  G2 <- matrix(0, n, n)
+
+  for (i in 1:N) {
+    f <- FUN(u[i], theta)
+    g1 <- g1 + w_hat[i] * f
+    G2 <- G2 + w_hat[i] * f %*% t(f)
+  }
+
+  rbind(cbind(1, sqrt(tt) * t(g1)),
+        cbind(sqrt(tt) * g1, G2))
+}
+
+A <- calc_A(theta = theta, FUN = FUN, design = res$design)
+
+phi_A <- calc_phiA(design = res$design, theta = theta, FUN = FUN, tt = tt, A = A)
+AI <- solve(A)
+# C <- pracma::blkdiag(matrix(0), diag(1, n))
+# penality <- sum(diag(C * AI * t(C)))
+plot_direction_Aopt(design = res$design, tt = tt, FUN = FUN, 
+                    A = A, phi = phi_A, theta = theta)
+```
+
