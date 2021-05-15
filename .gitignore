@@ -2,3 +2,6 @@
 vignette/*_cache
 vignette/*_files
 doc/
+
+vignettes/*.html
+vignettes/*.R
