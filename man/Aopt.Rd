@@ -4,7 +4,7 @@
 \alias{Aopt}
 \title{Calculate the A-optimal design under the SLSE}
 \usage{
-Aopt(N, u, tt, FUN, theta)
+Aopt(N, u, tt, FUN, theta, num_iter = 2500)
 }
 \arguments{
 \item{N}{The number of sample points in the design space}
@@ -16,9 +16,11 @@ Aopt(N, u, tt, FUN, theta)
 \item{FUN}{The function to calculate the derivative of the given model.}
 
 \item{theta}{The parameter value of the model}
+
+\item{num_iter}{Maximum number of iteration}
 }
 \value{
-CVX object that contains the solved optimal design
+A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 }
 \description{
 Calculate the A-optimal design under the SLSE

@@ -1,14 +1,10 @@
 #' Calculate the loss function of the D-optimal design
 #'
-#' @param N The number of sample points in the design space
-#' @param w_hat The weight of each design points
+#' @param design The resulted design that contains the design points and the associated weights
 #' @param FUN The function to calculate the derivative of the given model.
-#' @param u The discretized design space
 #' @param tt The level of skewness
 #' @param theta The parameter value of the model
 #' @param A The calculated covariance matrix
-#' @param q The penality term
-#' @param S The design space
 #' @param phi The loss loss function on each design point
 #'
 #' @details TODO
@@ -16,13 +12,20 @@
 #' @import CVXR
 #' @importFrom pracma blkdiag
 #' 
-#' @return The loss of the model at each design points
+#' @return The plot of the directional derivative of a D-optimal design
 #'
 #' @export
 
 
-plot_direction_Dopt <- function(u, w_hat, tt, FUN, A, phi, theta, q, S, N){
+plot_direction_Dopt <- function(design, tt, FUN, A, phi, theta){
+  
+  u <- design$location
+  w_hat <- design$weight
+  N <- length(u)
+  S <- u[c(1, length(u))]
+  
   n <- length(theta)
+  q <- n + 1
   mini <- min(phi - q)
   y <- rep(0, N)
   fx <- function(x){

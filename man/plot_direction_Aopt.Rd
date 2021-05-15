@@ -4,12 +4,10 @@
 \alias{plot_direction_Aopt}
 \title{Calculate the loss function of the A-optimal design}
 \usage{
-plot_direction_Aopt(u, w_hat, tt, FUN, A, phi, theta, q, S, N)
+plot_direction_Aopt(design, tt, FUN, A, phi, theta)
 }
 \arguments{
-\item{u}{The discretized design space}
-
-\item{w_hat}{The weight of each design points}
+\item{design}{The resulted design that contains the design points and the associated weights}
 
 \item{tt}{The level of skewness}
 
@@ -20,15 +18,9 @@ plot_direction_Aopt(u, w_hat, tt, FUN, A, phi, theta, q, S, N)
 \item{phi}{The loss loss function on each design point}
 
 \item{theta}{The parameter value of the model}
-
-\item{q}{The penality term}
-
-\item{S}{The design space}
-
-\item{N}{The number of sample points in the design space}
 }
 \value{
-The loss of the model at each design points
+The plot of the directional derivative of a A-optimal design
 }
 \description{
 Calculate the loss function of the A-optimal design

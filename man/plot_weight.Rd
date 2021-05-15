@@ -4,14 +4,10 @@
 \alias{plot_weight}
 \title{Plot the weight distribution of the optimal design}
 \usage{
-plot_weight(u, w_hat, S)
+plot_weight(design)
 }
 \arguments{
-\item{u}{The discretized design space}
-
-\item{w_hat}{The estimated weight of each design point}
-
-\item{S}{The design space}
+\item{design}{The resulted design that contains the design points and the associated weights}
 }
 \value{
 The plot that shows the given optimal design

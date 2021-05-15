@@ -4,14 +4,10 @@
 \alias{calc_phiD}
 \title{Calculate the loss function of the D-optimal design}
 \usage{
-calc_phiD(N, u, w_hat, FUN, tt, A, theta)
+calc_phiD(design, FUN, tt, A, theta)
 }
 \arguments{
-\item{N}{The number of sample points in the design space}
-
-\item{u}{The discretized design space}
-
-\item{w_hat}{The weight of each design points}
+\item{design}{The resulted design that contains the design points and the associated weights}
 
 \item{FUN}{The function to calculate the derivative of the given model.}
 

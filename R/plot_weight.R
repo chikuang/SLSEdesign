@@ -1,8 +1,6 @@
 #' Plot the weight distribution of the optimal design
 #'
-#' @param u The discretized design space
-#' @param w_hat The estimated weight of each design point
-#' @param S The design space
+#' @param design The resulted design that contains the design points and the associated weights
 #'
 #' @details TODO
 #'
@@ -13,7 +11,10 @@
 #' @export
 
 
-plot_weight <- function(u, w_hat, S){
+plot_weight <- function(design){
+  u <- design$location
+  w_hat <- design$weight
+  S <- u[c(1, length(u))]
   plot(u, w_hat, type = "p", xlim = S, ylim = c(0, 1),
        xlab  = "Design space", ylab = "weight")
   lines(u, w_hat, type = "l")

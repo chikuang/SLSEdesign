@@ -1,9 +1,7 @@
 #' Calculate the loss function of the A-optimal design
 #'
-#' @param N The number of sample points in the design space
-#' @param w_hat The weight of each design points
+#' @param design The resulted design that contains the design points and the associated weights
 #' @param FUN The function to calculate the derivative of the given model.
-#' @param u The discretized design space
 #' @param tt The level of skewness
 #' @param theta The parameter value of the model
 #' @param A The calculated covariance matrix
@@ -17,8 +15,10 @@
 #'
 #' @export
 
-calc_phiA <- function(N, u, w_hat, theta, FUN, tt, A){
-  w_hat <- c(w_hat)
+calc_phiA <- function(design, theta, FUN, tt, A){
+  u <- design$location
+  w_hat <- design$weight
+  N <- length(u)
   n <- length(theta)
   g1 <- matrix(0, n, 1)
   G2 <- matrix(0, n, n)

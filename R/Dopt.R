@@ -5,16 +5,18 @@
 #' @param u The discretized design space
 #' @param tt The level of skewness
 #' @param theta The parameter value of the model
+#' @param num_iter Maximum number of iteration
 #'
 #' @details TODO
 #'
 #' @import CVXR
 #'
-#' @return CVX object that contains the solved optimal design
+#' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
 #' @export
 
-Dopt <- function(N, u, tt, FUN, theta){
+Dopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
+  
   w <- Variable(N)
   del <- Variable(1)
   n <- length(theta)
@@ -29,12 +31,7 @@ Dopt <- function(N, u, tt, FUN, theta){
       g1 <- g1 + w[i] * f
       G2 <- G2 + w[i] * f %*% t(f)
     }
-
-    # ff <- lapply(1:N, function(x){
-    #  FUN(u[x], theta)
-    # }) %>% list.cbind()
-    # g1 <- colSums(w * t(ff))
-    # G2 <- (w * ff) %*% t(ff)
+    
     B <- rbind(cbind(1, sqrt(tt) * t(g1)),
                cbind(sqrt(tt) * g1, G2))
     -log_det(B) <= del
@@ -46,7 +43,7 @@ Dopt <- function(N, u, tt, FUN, theta){
   objective <- Minimize(del)
   problem <- Problem(objective,
                      c(constraint1, constraint2, constraint3))
-  solve(problem, num_iter = 10000)
+  solve(problem, num_iter = num_iter)
 
 }
 
