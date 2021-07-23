@@ -13,7 +13,7 @@ output:
     theme: readable
     highlight: tango
 vignette: >
-  %\VignetteIndexEntry{designSLSE}
+  %\VignetteIndexEntry{SLSEdesign}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -34,7 +34,7 @@ options(digits = 3)
 
 ```{r load package}
 # required dependencies
-require(designSLSE)
+require(SLSEdesign)
 require(CVXR)
 require(tibble)
 require(dplyr)

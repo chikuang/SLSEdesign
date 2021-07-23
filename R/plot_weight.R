@@ -2,14 +2,13 @@
 #'
 #' @param design The resulted design that contains the design points and the associated weights
 #'
-#' @details TODO
+#' @details This functions produce a figure that contains the location and their associated weights of the resulted optimal design measures.
 #'
 #' @importFrom graphics abline legend lines points
 #'
 #' @return The plot that shows the given optimal design
 #'
 #' @export
-
 
 plot_weight <- function(design){
   u <- design$location

@@ -6,7 +6,8 @@
 #' @param theta The parameter value of the model
 #' @param A The calculated covariance matrix
 #' 
-#' @details TODO
+#' @details This function calculates the loss function of the design problem under the A-optimality. The loss function under A-optimality is defined as the trace of the inverse of the Fisher information matrix
+#' 
 #'
 #' @import CVXR
 #' @importFrom pracma blkdiag

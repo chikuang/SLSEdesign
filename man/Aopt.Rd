@@ -2,7 +2,7 @@
 % Please edit documentation in R/Aopt.R
 \name{Aopt}
 \alias{Aopt}
-\title{Calculate the A-optimal design under the SLSE}
+\title{Calculate the A-optimal design under the second-order Least squares estimator}
 \usage{
 Aopt(N, u, tt, FUN, theta, num_iter = 2500)
 }
@@ -23,8 +23,8 @@ Aopt(N, u, tt, FUN, theta, num_iter = 2500)
 A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 }
 \description{
-Calculate the A-optimal design under the SLSE
+Calculate the A-optimal design under the second-order Least squares estimator
 }
 \details{
-TODO
+This function calculates the loss function of the design problem under the A-optimality. The loss function under A-optimality is defined as the trace of the inverse of the Fisher information matrix
 }

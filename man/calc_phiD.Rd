@@ -24,5 +24,5 @@ The loss of the model at each design points
 Calculate the loss function of the D-optimal design
 }
 \details{
-TODO
+This function calculates the loss function of the design problem under the D-optimality. The loss function under D-optimality is defined as the log determinant of the inverse of the Fisher information matrix
 }

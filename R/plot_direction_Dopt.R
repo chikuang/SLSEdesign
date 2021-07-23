@@ -7,7 +7,7 @@
 #' @param A The calculated covariance matrix
 #' @param phi The loss loss function on each design point
 #'
-#' @details TODO
+#' @details This function produces the figure for the directional derivative of the given D-optimal design of the compact supports. According to the general equivalence theorem, for an optimal design, all the directional derivative should be below zero line.
 #'
 #' @import CVXR
 #' @importFrom pracma blkdiag
@@ -15,7 +15,6 @@
 #' @return The plot of the directional derivative of a D-optimal design
 #'
 #' @export
-
 
 plot_direction_Dopt <- function(design, tt, FUN, A, phi, theta){
   

@@ -16,5 +16,5 @@ The plot that shows the given optimal design
 Plot the weight distribution of the optimal design
 }
 \details{
-TODO
+This functions produce a figure that contains the location and their associated weights of the resulted optimal design measures.
 }

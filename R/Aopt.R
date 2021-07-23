@@ -1,4 +1,4 @@
-#' Calculate the A-optimal design under the SLSE
+#' Calculate the A-optimal design under the second-order Least squares estimator
 #'
 #' @param FUN The function to calculate the derivative of the given model.
 #' @param N The number of sample points in the design space
@@ -7,7 +7,7 @@
 #' @param theta The parameter value of the model
 #' @param num_iter Maximum number of iteration
 #'
-#' @details TODO
+#' @details This function calculates the loss function of the design problem under the A-optimality. The loss function under A-optimality is defined as the trace of the inverse of the Fisher information matrix
 #'
 #' @import CVXR
 #' @importFrom pracma blkdiag
@@ -43,7 +43,7 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
     B <- rbind(cbind(1, sqrt(tt) * t(g1)),
                cbind(sqrt(tt) * g1, G2))
 
-    # C <- blkdiag(matrix(0), diag(1, n))
+    C <- blkdiag(matrix(0), diag(1, n))
 
     for(k in 1:n){
       obj_val <- obj_val + matrix_frac(C[, k], B)

@@ -6,7 +6,7 @@
 #' @param theta The parameter value of the model
 #' @param A The calculated covariance matrix
 #'
-#' @details TODO
+#' @details This function calculates the loss function of the design problem under the D-optimality. The loss function under D-optimality is defined as the log determinant of the inverse of the Fisher information matrix
 #'
 #' @import CVXR
 #' 

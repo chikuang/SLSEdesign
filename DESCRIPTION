@@ -1,5 +1,5 @@
-Package: designSLSE
-Title: Computing optimal regression design under the second-order least squares estimator
+Package: SLSEdesign
+Title: Optimal regression design under the second-order Least squares estimator
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Chi-Kuang",
@@ -10,7 +10,7 @@ Authors@R:
       person(given = "Julie",
            family = "Zhou",
            role = c("aut", "ctb")))
-Description: With given input including number of points, design space, measure skewness, models and parameter value, this package calculates the objective value, probability measures and plot the equivalence theory for A- and D- optimal designs under the second-order least squares estimator.
+Description: With given inputs that includes number of points, design space, measure skewness, models and parameter value, this package calculates the objective value, probability measures and plot the equivalence theory for A- and D- optimal designs under the second-order Least squares estimator.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -25,5 +25,6 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    gridExtra
+    gridExtra,
+    testthat
 VignetteBuilder: knitr

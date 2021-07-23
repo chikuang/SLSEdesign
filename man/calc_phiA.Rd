@@ -24,5 +24,5 @@ The loss of the model at each design points
 Calculate the loss function of the A-optimal design
 }
 \details{
-TODO
+This function calculates the loss function of the design problem under the A-optimality. The loss function under A-optimality is defined as the trace of the inverse of the Fisher information matrix
 }

@@ -26,5 +26,5 @@ The plot of the directional derivative of a A-optimal design
 Calculate the loss function of the A-optimal design
 }
 \details{
-TODO
+This function produces the figure for the directional derivative of the given A-optimal design of the compact supports. According to the general equivalence theorem, for an optimal design, all the directional derivative should be below zero line.
 }

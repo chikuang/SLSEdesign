@@ -26,5 +26,5 @@ A list that contains 1. Value of the objective function at solution. 2. Status. 
 Calculate the D-optimal design under the SLSE
 }
 \details{
-TODO
+This function calculates the loss function of the design problem under the D-optimality. The loss function under D-optimality is defined as the log determinant of the inverse of the Fisher information matrix
 }
