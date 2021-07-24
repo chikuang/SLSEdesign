@@ -1,6 +1,6 @@
 Package: SLSEdesign
-Title: Optimal regression design under the second-order Least squares estimator
-Version: 0.0.0.9000
+Title: Optimal Regression Design under the Second-Order Least Squares Estimator
+Version: 0.0.1
 Authors@R: 
     c(person(given = "Chi-Kuang",
            family = "Yeh",
@@ -25,6 +25,5 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    gridExtra,
-    testthat
+    gridExtra
 VignetteBuilder: knitr
