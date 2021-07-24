@@ -12,23 +12,28 @@
 #' @import CVXR
 #' @importFrom pracma blkdiag
 #' @importFrom tibble tibble
-#' 
+#'
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
-#' 
-#' @export
+#'
+#' @examples
+#' peleg <- function(xi, theta){
+#'   deno <- (theta[1] + xi * theta[2])^2
+#'   rbind(-xi/deno, -xi^2/deno)
+#' }
+#' Aopt(101, c(0, 180), 0, peleg, c(0.05, 0.5))
 
 Aopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
-  
+
   n <- length(theta)
   g1 <- matrix(0, n, 1)
   G2 <- matrix(0, n, n)
   obj_val <- 0
   C <- rbind(0, diag(1, n, n))
-  
+
   w <- Variable(N)
   del <- Variable(1)
-  
-  # Set up constraints 
+
+  # Set up constraints
   constraint1 <- lapply(1:N,
                         function(x){
                           -w[x] <= 0
@@ -53,7 +58,7 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
 
   constraint3 <- list( t(w) %*% rep(1, N) == 1)
 
-  # Solve the optimization problem 
+  # Solve the optimization problem
   objective <- Minimize(del)
   problem <- Problem(objective,
                      c(constraint1, constraint2, constraint3))
