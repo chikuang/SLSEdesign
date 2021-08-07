@@ -55,19 +55,19 @@ require(gridExtra)
 5. **FUN**: The function for calculating the derivatives of the given model
 
 ```{r Define inputs, cache = TRUE}
-N <- 101
+N <- 31
 S <- c(0, 180)
 tt <- 0
 theta <- c(0.05, 0.5)
 
-FUN <- function(xi, theta){
+peleg <- function(xi, theta){
   deno <- (theta[1] + xi * theta[2])^2
   rbind(-xi/deno, -xi^2/deno)
 }
 
 u <- seq(from = S[1], to = S[2], length.out = N)
 
-res <- Aopt(N = N, u = u, tt = tt, FUN = FUN, 
+res <- Aopt(N = N, u = u, tt = tt, FUN = peleg, 
             theta = theta)
 
 ```
@@ -79,7 +79,6 @@ res <- Aopt(N = N, u = u, tt = tt, FUN = FUN,
 
 ```{r output}
 res$design %>% filter(weight > 1E-4)
-
 ```
 
 ## Now we want to plot the weights
@@ -88,7 +87,6 @@ plot_weight(res$design)
 ```
 
 ## Plot the directional derivative to use the equivalence theorem
-
 
 ```{r directional}
 calc_A <- function(theta, FUN, design){
