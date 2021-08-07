@@ -9,8 +9,19 @@
 #' @details This function calculates the loss function of the design problem under the D-optimality. The loss function under D-optimality is defined as the log determinant of the inverse of the Fisher information matrix
 #'
 #' @import CVXR
-#' 
+#'
 #' @return The loss of the model at each design points
+#'
+#' @examples
+#' my_design <- tibble(location = c(0, 180), weight = c(1/2, 1/2))
+#' theta <- c(0.05, 0.5)
+#' peleg <- function(xi, theta){
+#'    deno <- (theta[1] + xi * theta[2])^2
+#'    rbind(-xi/deno, -xi^2/deno)
+#' }
+#' A <- matrix(c(1, 0, 0, 0, 0.2116, 1.3116, 0, 1.3116, 15.462521), byrow = T, ncol = 3)
+#' res <- calc_phiD(my_design, theta, peleg, 0, A)
+#' res
 #'
 #' @export
 
@@ -22,7 +33,7 @@ calc_phiD <- function(design, FUN, tt, A, theta){
   g1 <- matrix(0, n, 1)
   G2 <- matrix(0, n, n)
   phi_D <- rep(0, N)
-  
+
   for( i in 1:N){
     f <- FUN(u[i], theta)
     I <- rbind(cbind(1, sqrt(tt) * t(f)),

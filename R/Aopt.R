@@ -17,12 +17,15 @@
 #'
 #' @examples
 #' peleg <- function(xi, theta){
-#'   deno <- (theta[1] + xi * theta[2])^2
-#'   rbind(-xi/deno, -xi^2/deno)
+#'    deno <- (theta[1] + xi * theta[2])^2
+#'    rbind(-xi/deno, -xi^2/deno)
 #' }
-#' Aopt(101, c(0, 180), 0, peleg, c(0.05, 0.5))
+#' my_design <- Aopt(N = 31, u = seq(0, 180, length.out = 31), tt = 0, FUN = peleg,
+#'     theta = c(0.05, 0.5), num_iter = 500)
+#' my_design$design
+#' my_design$val
 
-Aopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
+Aopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
 
   n <- length(theta)
   g1 <- matrix(0, n, 1)
@@ -30,8 +33,8 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
   obj_val <- 0
   C <- rbind(0, diag(1, n, n))
 
-  w <- Variable(N)
-  del <- Variable(1)
+  w <- CVXR::Variable(N)
+  del <- CVXR::Variable(1)
 
   # Set up constraints
   constraint1 <- lapply(1:N,
@@ -48,10 +51,10 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
     B <- rbind(cbind(1, sqrt(tt) * t(g1)),
                cbind(sqrt(tt) * g1, G2))
 
-    C <- blkdiag(matrix(0), diag(1, n))
+    C <- pracma::blkdiag(matrix(0), diag(1, n))
 
     for(k in 1:n){
-      obj_val <- obj_val + matrix_frac(C[, k], B)
+      obj_val <- obj_val + CVXR::matrix_frac(C[, k], B)
     }
     obj_val <= del
   })
@@ -59,14 +62,13 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 2500){
   constraint3 <- list( t(w) %*% rep(1, N) == 1)
 
   # Solve the optimization problem
-  objective <- Minimize(del)
-  problem <- Problem(objective,
+  objective <- CVXR::Minimize(del)
+  problem <- CVXR::Problem(objective,
                      c(constraint1, constraint2, constraint3))
   res <- CVXR::solve(problem, num_iter = num_iter)
 
   # figure out the location of the design points
-  tb <- tibble(location = u,
+  tb <- tibble::tibble(location = u,
                 weight = c(res$getValue(w)))
   list(val = res$value, status = res$status, design = tb)
 }
-
