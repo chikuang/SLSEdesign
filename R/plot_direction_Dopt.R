@@ -11,18 +11,23 @@
 #'
 #' @import CVXR
 #' @importFrom pracma blkdiag
-#' 
+#'
+#' @example
+#' \dontrun{
+#'   TODO
+#' }
+#'
 #' @return The plot of the directional derivative of a D-optimal design
 #'
 #' @export
 
 plot_direction_Dopt <- function(design, tt, FUN, A, phi, theta){
-  
+
   u <- design$location
   w_hat <- design$weight
   N <- length(u)
   S <- u[c(1, length(u))]
-  
+
   n <- length(theta)
   q <- n + 1
   mini <- min(phi - q)

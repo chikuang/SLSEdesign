@@ -9,9 +9,10 @@
 #' @return The plot that shows the given optimal design
 #'
 #' @examples
+#' \dontrun{
 #' Des = list(location = c(-1, +1), weight = c(0.5, 0.5))
 #' plot_weight(Des)
-#'
+#' }
 #' @export
 
 plot_weight <- function(design){

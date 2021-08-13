@@ -14,6 +14,7 @@
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
 #' @examples
+#' \dontrun{
 #' peleg <- function(xi, theta){
 #'    deno <- (theta[1] + xi * theta[2])^2
 #'    rbind(-xi/deno, -xi^2/deno)
@@ -22,6 +23,7 @@
 #'     theta = c(0.05, 0.5), num_iter = 500)
 #' my_design$design
 #' my_design$val
+#' }
 
 Dopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
 
@@ -50,7 +52,7 @@ Dopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
 
   constraint3 <- list( t(w) %*% rep(1, N) == 1)
 
-  # Solve the optimization problem --------------------------------------------------------------
+  # Solve
   objective <- CVXR::Minimize(del)
   problem <- CVXR::Problem(objective,
                      c(constraint1, constraint2, constraint3))
