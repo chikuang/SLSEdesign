@@ -4,7 +4,7 @@
 \alias{Aopt}
 \title{Calculate the A-optimal design under the second-order Least squares estimator}
 \usage{
-Aopt(N, u, tt, FUN, theta, num_iter = 2500)
+Aopt(N, u, tt, FUN, theta, num_iter = 1000)
 }
 \arguments{
 \item{N}{The number of sample points in the design space}

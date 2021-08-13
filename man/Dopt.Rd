@@ -4,7 +4,7 @@
 \alias{Dopt}
 \title{Calculate the D-optimal design under the SLSE}
 \usage{
-Dopt(N, u, tt, FUN, theta, num_iter = 2500)
+Dopt(N, u, tt, FUN, theta, num_iter = 1000)
 }
 \arguments{
 \item{N}{The number of sample points in the design space}
