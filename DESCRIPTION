@@ -10,7 +10,7 @@ Authors@R:
       person(given = "Julie",
            family = "Zhou",
            role = c("aut", "ctb")))
-Description: With given inputs that includes number of points, design space, measure skewness, models and parameter value, this package calculates the objective value, probability measures and plot the equivalence theory for A- and D- optimal designs under the second-order Least squares estimator.
+Description: With given inputs that includes number of points, design space, measure skewness, models and parameter value, this package calculates the objective value, probability measures and plot the equivalence theory for A- and D- optimal designs under the second-order Least squares estimator. This package is based on the paper "Properties of optimal regression designs under the second-order least squares estimator" by Yeh and Zhou (2021). 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
