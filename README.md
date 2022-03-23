@@ -12,8 +12,10 @@ This is a package to compute the optimal regression design under the second-orde
 
 SLSEdesign is available in Python, Julia and R. To intall in R
 
-`devtools::install_github("chikuang/SLSEdesign")`
 
+```r
+devtools::install_github("chikuang/SLSEdesign")
+```
 ## Examples
 
 Will be added soon.
