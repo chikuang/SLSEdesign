@@ -55,7 +55,7 @@ require(gridExtra)
 5. **FUN**: The function for calculating the derivatives of the given model
 
 ```{r Define inputs, cache = TRUE}
-N <- 31
+N <- 11
 S <- c(0, 180)
 tt <- 0
 theta <- c(0.05, 0.5)
@@ -69,7 +69,6 @@ u <- seq(from = S[1], to = S[2], length.out = N)
 
 res <- Aopt(N = N, u = u, tt = tt, FUN = peleg, 
             theta = theta)
-
 ```
 
 
@@ -90,7 +89,6 @@ plot_weight(res$design)
 
 ```{r directional}
 calc_A <- function(theta, FUN, design){
-  
   u <- design$location
   w_hat <- design$weight
   n <- length(theta)
@@ -107,13 +105,14 @@ calc_A <- function(theta, FUN, design){
         cbind(sqrt(tt) * g1, G2))
 }
 
-A <- calc_A(theta = theta, FUN = FUN, design = res$design)
+A <- calc_A(theta = theta, FUN = peleg, design = res$design)
 
-phi_A <- calc_phiA(design = res$design, theta = theta, FUN = FUN, tt = tt, A = A)
+phi_A <- calc_phiA(design = res$design, 
+                   theta = theta, FUN = peleg, tt = tt, A = A)
 AI <- solve(A)
 # C <- pracma::blkdiag(matrix(0), diag(1, n))
 # penality <- sum(diag(C * AI * t(C)))
-plot_direction_Aopt(design = res$design, tt = tt, FUN = FUN, 
+plot_direction_Aopt(design = res$design, tt = tt, FUN = peleg, 
                     A = A, phi = phi_A, theta = theta)
 ```
 
