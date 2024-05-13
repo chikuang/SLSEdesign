@@ -5,17 +5,17 @@ author: |
   | University of Waterloo and University of Victoria
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_vignette:
-    toc: yes
   rmarkdown::html_document:
     toc: yes
     toc_float: true
     theme: readable
     highlight: tango
+  rmarkdown::html_vignette:
+    toc: yes
 vignette: >
   %\VignetteIndexEntry{SLSEdesign}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 <!-- latex macros -->
@@ -37,7 +37,6 @@ options(digits = 3)
 require(SLSEdesign)
 require(CVXR)
 require(tibble)
-require(dplyr)
 require(pracma)
 require(gridExtra)
 ```
@@ -77,7 +76,7 @@ res <- Aopt(N = N, u = u, tt = tt, FUN = peleg,
 ## Showing the support points 
 
 ```{r output}
-res$design %>% filter(weight > 1E-4)
+res$design[res$design$weight > 1E-4, ]
 ```
 
 ## Now we want to plot the weights
