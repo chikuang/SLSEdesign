@@ -26,3 +26,17 @@ Calculate the loss function of the D-optimal design
 \details{
 This function calculates the loss function of the design problem under the D-optimality. The loss function under D-optimality is defined as the log determinant of the inverse of the Fisher information matrix
 }
+\examples{
+\dontrun{
+my_design <- data.frame(location = c(0, 180), weight = c(1/2, 1/2))
+theta <- c(0.05, 0.5)
+peleg <- function(xi, theta){
+   deno <- (theta[1] + xi * theta[2])^2
+   rbind(-xi/deno, -xi^2/deno)
+}
+A <- matrix(c(1, 0, 0, 0, 0.2116, 1.3116, 0, 1.3116, 15.462521), byrow = TRUE, ncol = 3)
+res <- calc_phiD(my_design, theta, peleg, 0, A)
+res
+}
+
+}

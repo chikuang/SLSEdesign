@@ -14,17 +14,16 @@
 #' @return The loss of the model at each design points
 #'
 #' @examples
-#' \dontrun{
-#' my_design <- tibble(location = c(0, 180), weight = c(1/2, 1/2))
+#' my_design <- data.frame(location = c(0, 180), weight = c(1/2, 1/2))
 #' theta <- c(0.05, 0.5)
 #' peleg <- function(xi, theta){
 #'    deno <- (theta[1] + xi * theta[2])^2
 #'    rbind(-xi/deno, -xi^2/deno)
 #' }
-#' A <- matrix(c(1, 0, 0, 0, 0.2116, 1.3116, 0, 1.3116, 15.462521), byrow = T, ncol = 3)
+#' A <- matrix(c(1, 0, 0, 0, 0.2116, 1.3116, 0, 1.3116, 15.462521), byrow = TRUE, ncol = 3)
 #' res <- calc_phiA(my_design, theta, peleg, 0, A)
 #' res
-#' }
+#'
 #' @export
 
 calc_phiA <- function(design, theta, FUN, tt, A){

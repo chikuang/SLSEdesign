@@ -16,9 +16,6 @@
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
 #' @examples
-#' #' @example
-#' \dontrun{
-#'
 #' peleg <- function(xi, theta){
 #'    deno <- (theta[1] + xi * theta[2])^2
 #'    rbind(-xi/deno, -xi^2/deno)
@@ -27,7 +24,6 @@
 #'     theta = c(0.05, 0.5), num_iter = 500)
 #' my_design$design
 #' my_design$val
-#' }
 #'
 #' @export
 

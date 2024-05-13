@@ -14,10 +14,13 @@
 #'
 #' @return The plot of the directional derivative of a A-optimal design
 #'
-#' @example
-#' \dontrun{
-#'   TODO
+#' @examples
+#' peleg <- function(xi, theta){
+#'    deno <- (theta[1] + xi * theta[2])^2
+#'    rbind(-xi/deno, -xi^2/deno)
 #' }
+#' design = data.frame(location = c(6.480, 180.000), weight = c(0.852, 0.148))
+#' plot_direction_Aopt(design, tt=0, FUN = peleg, phi = 0.0163, theta = c(0.5, 0.05))
 #'
 #' @export
 

@@ -18,3 +18,8 @@ Plot the weight distribution of the optimal design
 \details{
 This functions produce a figure that contains the location and their associated weights of the resulted optimal design measures.
 }
+\examples{
+Des = list(location = c(-1, +1), weight = c(0.5, 0.5))
+plot_weight(Des)
+
+}

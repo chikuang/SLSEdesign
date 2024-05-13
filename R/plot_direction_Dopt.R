@@ -12,10 +12,14 @@
 #' @import CVXR
 #' @importFrom pracma blkdiag
 #'
-#' @example
-#' \dontrun{
-#'   TODO
+#' @examples
+#' peleg <- function(xi, theta){
+#'    deno <- (theta[1] + xi * theta[2])^2
+#'    rbind(-xi/deno, -xi^2/deno)
 #' }
+#' design = data.frame(location = c(9, 180.000), weight = c(0.5, 0.5))
+#' plot_direction_Dopt(design, tt=0, FUN = peleg, phi = -14.8774, theta = c(0.5, 0.05))
+#'
 #'
 #' @return The plot of the directional derivative of a D-optimal design
 #'

@@ -28,3 +28,13 @@ Calculate the loss function of the D-optimal design
 \details{
 This function produces the figure for the directional derivative of the given D-optimal design of the compact supports. According to the general equivalence theorem, for an optimal design, all the directional derivative should be below zero line.
 }
+\examples{
+peleg <- function(xi, theta){
+   deno <- (theta[1] + xi * theta[2])^2
+   rbind(-xi/deno, -xi^2/deno)
+}
+design = data.frame(location = c(9, 180.000), weight = c(0.5, 0.5))
+plot_direction_Dopt(design, tt=0, FUN = peleg, phi = -14.8774, theta = c(0.5, 0.05))
+
+
+}

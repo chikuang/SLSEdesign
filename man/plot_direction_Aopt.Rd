@@ -28,3 +28,12 @@ Calculate the loss function of the A-optimal design
 \details{
 This function produces the figure for the directional derivative of the given A-optimal design of the compact supports. According to the general equivalence theorem, for an optimal design, all the directional derivative should be below zero line.
 }
+\examples{
+peleg <- function(xi, theta){
+   deno <- (theta[1] + xi * theta[2])^2
+   rbind(-xi/deno, -xi^2/deno)
+}
+design = data.frame(location = c(6.480, 180.000), weight = c(0.852, 0.148))
+plot_direction_Aopt(design, tt=0, FUN = peleg, phi = 0.0163, theta = c(0.5, 0.05))
+
+}
