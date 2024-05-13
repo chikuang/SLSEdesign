@@ -5,3 +5,5 @@ doc/
 
 vignettes/*.html
 vignettes/*.R
+
+inst/doc/*.html
