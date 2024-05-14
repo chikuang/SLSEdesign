@@ -14,6 +14,7 @@
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
 #' @examples
+#' \dontrun{
 #' poly3 <- function(xi, theta){
 #'   matrix(c(1, xi, xi^2, xi^3), ncol = 1)
 #' }
@@ -21,7 +22,7 @@
 #'    tt = 0, FUN = poly3, theta = rep(0,4), num_iter = 500)
 #' my_design$design
 #' my_design$val
-#'
+#' }
 #' @export
 
 Dopt <- function(N, u, tt, FUN, theta, num_iter = 1000){

@@ -16,6 +16,7 @@
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
 #' @examples
+#' \dontrun{
 #' poly1 <- function(xi, theta){
 #'   matrix(c(1, xi), ncol = 1)
 #' }
@@ -23,7 +24,7 @@
 #'    tt = 0, FUN = poly1, theta = rep(0,2), num_iter = 50)
 #' my_design$design
 #' my_design$val
-#'
+#' }
 #' @export
 
 Aopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
