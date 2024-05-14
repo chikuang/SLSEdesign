@@ -41,8 +41,8 @@ my_design$val
 
 + [x] Add doi in the DESCRIPTION file
 + [x] Add files in inst/doc/ folder
-+ [ ] Add examples to all the exported functions to fulfill the requirement of CRAN
-+ [ ] Add information matrices in the examples within the calc_directional_derivatives functions
++ [x] Add examples to all the exported functions to fulfill the requirement of CRAN
++ [x] Add information matrices in the examples within the calc_directional_derivatives functions
 + [ ] Upload the package to CRAN
 
 ## Reference 
