@@ -6,3 +6,5 @@
 ^CRAN-SUBMISSION$
 ^doc$
 ^Meta$
+^codecov\.yml$
+^\.covrignore$
