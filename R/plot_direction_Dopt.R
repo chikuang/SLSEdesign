@@ -4,8 +4,7 @@
 #' @param FUN The function to calculate the derivative of the given model.
 #' @param tt The level of skewness
 #' @param theta The parameter value of the model
-#' @param A The calculated covariance matrix
-#' @param phi The loss loss function on each design point
+#' @param u The discretized design points
 #'
 #' @details This function produces the figure for the directional derivative of the given D-optimal design of the compact supports. According to the general equivalence theorem, for an optimal design, all the directional derivative should be below zero line.
 #'
@@ -13,48 +12,49 @@
 #' @importFrom pracma blkdiag
 #'
 #' @examples
-#' peleg <- function(xi, theta){
-#'    deno <- (theta[1] + xi * theta[2])^2
-#'    rbind(-xi/deno, -xi^2/deno)
+#' poly3 <- function(xi, theta){
+#'     matrix(c(1, xi, xi^2, xi^3), ncol = 1)
 #' }
-#' design = data.frame(location = c(9, 180.000), weight = c(0.5, 0.5))
-#' plot_direction_Dopt(design, tt=0, FUN = peleg, phi = -14.8774, theta = c(0.5, 0.05))
+#' design = data.frame(location = c(-1, -0.447, 0.447, 1),
+#'  weight = rep(0.25, 4))
+#' u = seq(-1, 1, length.out = 201)
+#' plot_direction_Dopt(u, design, tt=0, FUN = poly3,
+#'   theta = rep(0, 4))
 #'
 #'
 #' @return The plot of the directional derivative of a D-optimal design
 #'
 #' @export
 
-plot_direction_Dopt <- function(design, tt, FUN, A, phi, theta){
-
-  u <- design$location
-  w_hat <- design$weight
+plot_direction_Dopt <- function(u, design, tt, FUN, theta){
   N <- length(u)
-  S <- u[c(1, length(u))]
-
-  n <- length(theta)
-  q <- n + 1
-  mini <- min(phi - q)
-  y <- rep(0, N)
-  fx <- function(x){
-    FUN(x, theta)
+  S <- u[c(1, N)]
+  q <- length(theta)
+  sqt <- sqrt(tt)
+  g1 <- matrix(0, ncol = 1, nrow = q)
+  G2 <- matrix(0, nrow = q, ncol = q)
+  for (j in 1:nrow(design)) {
+    uj <- design$location[j]
+    wj <- design$weight[j]
+    f <- FUN(uj, theta)
+    g1 <- g1 + wj * f
+    G2 <- G2 + wj * tcrossprod(f)
   }
-
-  ff <- function(x){
-    I <- rbind(cbind(1, sqrt(tt) * t(fx(x))),
-               cbind(sqrt(tt) * fx(x), fx(x) %*% t(fx(x))))
-    sum(diag(solve(A, I))) - q
-  }
-
+  B <- rbind(cbind(1, sqt*t(g1)),
+             cbind(sqt*g1, G2))
+  BI <- solve(B)
+  phiD <- rep(0, N)
   for(i in 1:N){
-    y[i] <- ff(u[i])
+    f <- FUN(u[i], theta)
+    M <- rbind(cbind(1, sqt * t(f)),
+               cbind(sqt*f, tcrossprod(f)))
+    phiD[i] <-  sum(diag(BI %*% M))
   }
-
-  plot(u, y, type = "l",  col = "black", xlim  = S, ylim  = c(mini*1.1, 1),
-       xlab = "Design space", ylab = expression(d(x, theta)))
-  points(u, phi - q,  col = "blue")
-  points(u[which(w_hat > 1E-4)], (phi - q)[which(w_hat > 1E-4)], col = "red", cex = 2)
-  abline(u, 0)
+  # error = max(phiD - (q+1))
+  plot(x = u, phiD - (q+1), col = "blue")
+  lines(x = u, phiD - (q+1), col = "blue")
+  abline(h=0, col="black")
+  points(design$location, rep(0,nrow(design)), col = "red", cex = 2)
   legend("bottomright",
          legend=c("Reference Line", expression(d(x, theta)), "discretized point", "Support point"),
          col = c("black", "blue", "blue", "red"),

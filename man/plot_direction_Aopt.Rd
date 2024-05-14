@@ -4,18 +4,16 @@
 \alias{plot_direction_Aopt}
 \title{Calculate the loss function of the A-optimal design}
 \usage{
-plot_direction_Aopt(design, tt, FUN, A, phi, theta)
+plot_direction_Aopt(u, design, tt, FUN, theta)
 }
 \arguments{
+\item{u}{The discretized design points}
+
 \item{design}{The resulted design that contains the design points and the associated weights}
 
 \item{tt}{The level of skewness}
 
 \item{FUN}{The function to calculate the derivative of the given model.}
-
-\item{A}{The calculated covariance matrix}
-
-\item{phi}{The loss loss function on each design point}
 
 \item{theta}{The parameter value of the model}
 }
@@ -29,11 +27,12 @@ Calculate the loss function of the A-optimal design
 This function produces the figure for the directional derivative of the given A-optimal design of the compact supports. According to the general equivalence theorem, for an optimal design, all the directional derivative should be below zero line.
 }
 \examples{
-peleg <- function(xi, theta){
-   deno <- (theta[1] + xi * theta[2])^2
-   rbind(-xi/deno, -xi^2/deno)
+poly3 <- function(xi, theta){
+  matrix(c(1, xi, xi^2, xi^3), ncol = 1)
 }
-design = data.frame(location = c(6.480, 180.000), weight = c(0.852, 0.148))
-plot_direction_Aopt(design, tt=0, FUN = peleg, phi = 0.0163, theta = c(0.5, 0.05))
+design = data.frame(location = c(-1, -0.464, 0.464, 1),
+                      weight = c(0.151, 0.349, 0.349, 0.151))
+u = seq(-1, 1, length.out = 201)
+plot_direction_Aopt(u=u, design=design, tt=0, FUN = poly3, theta = rep(0,4))
 
 }

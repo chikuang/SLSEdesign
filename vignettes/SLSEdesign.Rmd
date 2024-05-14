@@ -54,64 +54,58 @@ require(gridExtra)
 5. **FUN**: The function for calculating the derivatives of the given model
 
 ```{r Define inputs, cache = TRUE}
-N <- 11
-S <- c(0, 180)
+N <- 21
+S <- c(-1, 1)
 tt <- 0
-theta <- c(0.05, 0.5)
+theta <- rep(1, 4)
 
-peleg <- function(xi, theta){
-  deno <- (theta[1] + xi * theta[2])^2
-  rbind(-xi/deno, -xi^2/deno)
+poly3 <- function(xi,theta){
+    matrix(c(1, xi, xi^2, xi^3), ncol = 1)
 }
 
 u <- seq(from = S[1], to = S[2], length.out = N)
 
-res <- Aopt(N = N, u = u, tt = tt, FUN = peleg, 
+res <- Aopt(N = N, u = u, tt = tt, FUN = poly3, 
             theta = theta)
 ```
 
 
-# Manage the outputs
+## Manage the outputs
 
-## Showing the support points 
+Showing the optimal design and the support points
 
 ```{r output}
-res$design[res$design$weight > 1E-4, ]
+res$design
 ```
 
-## Now we want to plot the weights
+Or we can plot them
+
 ```{r weight}
 plot_weight(res$design)
 ```
 
-## Plot the directional derivative to use the equivalence theorem
+## Plot the directional derivative to use the equivalence theorem for  3rd order polynomial models
 
-```{r directional}
-calc_A <- function(theta, FUN, design){
-  u <- design$location
-  w_hat <- design$weight
-  n <- length(theta)
-  g1 <- matrix(0, n, 1)
-  G2 <- matrix(0, n, n)
-
-  for (i in 1:N) {
-    f <- FUN(u[i], theta)
-    g1 <- g1 + w_hat[i] * f
-    G2 <- G2 + w_hat[i] * f %*% t(f)
-  }
-
-  rbind(cbind(1, sqrt(tt) * t(g1)),
-        cbind(sqrt(tt) * g1, G2))
+### D-optimal design
+```{r}
+poly3 <- function(xi,theta){
+    matrix(c(1, xi, xi^2, xi^3), ncol = 1)
 }
-
-A <- calc_A(theta = theta, FUN = peleg, design = res$design)
-
-phi_A <- calc_phiA(design = res$design, 
-                   theta = theta, FUN = peleg, tt = tt, A = A)
-AI <- solve(A)
-# C <- pracma::blkdiag(matrix(0), diag(1, n))
-# penality <- sum(diag(C * AI * t(C)))
-plot_direction_Aopt(design = res$design, tt = tt, FUN = peleg, 
-                    A = A, phi = phi_A, theta = theta)
+design = data.frame(location = c(-1, -0.447, 0.447, 1),
+ weight = rep(0.25, 4))
+u = seq(-1, 1, length.out = 201)
+plot_direction_Dopt(u, design, tt=0, FUN = poly3,
+  theta = rep(0, 4))
 ```
 
+### A-optimal design
+
+```{r}
+poly3 <- function(xi, theta){
+  matrix(c(1, xi, xi^2, xi^3), ncol = 1)
+}
+design = data.frame(location = c(-1, -0.464, 0.464, 1),
+                    weight = c(0.151, 0.349, 0.349, 0.151))
+u = seq(-1, 1, length.out = 201)
+plot_direction_Aopt(u, design, tt=0, FUN = poly3, theta = rep(0,4))
+```

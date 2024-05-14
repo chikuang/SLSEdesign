@@ -16,12 +16,11 @@
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
 #' @examples
-#' peleg <- function(xi, theta){
-#'    deno <- (theta[1] + xi * theta[2])^2
-#'    rbind(-xi/deno, -xi^2/deno)
+#' poly1 <- function(xi, theta){
+#'   matrix(c(1, xi), ncol = 1)
 #' }
-#' my_design <- Aopt(N = 31, u = seq(0, 180, length.out = 31), tt = 0, FUN = peleg,
-#'     theta = c(0.05, 0.5), num_iter = 500)
+#' my_design <- Aopt(N = 11, u = seq(-1, +1, length.out = 11),
+#'    tt = 0, FUN = poly1, theta = rep(0,2), num_iter = 50)
 #' my_design$design
 #' my_design$val
 #'
@@ -36,41 +35,33 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
   C <- rbind(0, diag(1, n, n))
 
   w <- CVXR::Variable(N)
-  del <- CVXR::Variable(1)
 
   # Set up constraints
-  constraint1 <- lapply(1:N,
-                        function(x){
-                          -w[x] <= 0
-                        })
-  constraint2 <- list({
-    for (i in 1:N) {
-      f <- FUN(u[i], theta)
-      g1 <- g1 + w[i] * f
-      G2 <- G2 + w[i] * f %*% t(f)
-    }
+  for (i in 1:N) {
+    f <- FUN(u[i], theta)
+    g1 <- g1 + w[i] * f
+    G2 <- G2 + w[i] * f %*% t(f)
+  }
 
-    B <- rbind(cbind(1, sqrt(tt) * t(g1)),
-               cbind(sqrt(tt) * g1, G2))
+  B <- rbind(cbind(1, sqrt(tt) * t(g1)),
+             cbind(sqrt(tt) * g1, G2))
 
-    C <- pracma::blkdiag(matrix(0), diag(1, n))
+  C <- pracma::blkdiag(matrix(0), diag(1, n))
 
-    for(k in 1:n){
-      obj_val <- obj_val + CVXR::matrix_frac(C[, k], B)
-    }
-    obj_val <= del
-  })
+  for(k in 1:n){
+    obj_val <- obj_val + CVXR::matrix_frac(C[, k], B)
+  }
 
-  constraint3 <- list( t(w) %*% rep(1, N) == 1)
+  my_constraints <- list(w >=0, sum(w) == 1)
 
   # Solve the optimization problem
-  objective <- CVXR::Minimize(del)
-  problem <- CVXR::Problem(objective,
-                     c(constraint1, constraint2, constraint3))
+  problem <- CVXR::Problem(CVXR::Minimize(obj_val),
+                           constraints = my_constraints)
   res <- CVXR::solve(problem, num_iter = num_iter)
 
   # figure out the location of the design points
-  tb <- tibble::tibble(location = u,
-                weight = c(res$getValue(w)))
+  tb <- tibble(location = u,
+                   weight = c(res$getValue(w)))
+  tb <- tb[tb$weight > 1E-2, ]
   list(val = res$value, status = res$status, design = tb)
 }

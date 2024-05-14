@@ -13,7 +13,6 @@
 #' @return The loss of the model at each design points
 #'
 #' @examples
-#' \dontrun{
 #' my_design <- data.frame(location = c(0, 180), weight = c(1/2, 1/2))
 #' theta <- c(0.05, 0.5)
 #' peleg <- function(xi, theta){
@@ -21,13 +20,11 @@
 #'    rbind(-xi/deno, -xi^2/deno)
 #' }
 #' A <- matrix(c(1, 0, 0, 0, 0.2116, 1.3116, 0, 1.3116, 15.462521), byrow = TRUE, ncol = 3)
-#' res <- calc_phiD(my_design, theta, peleg, 0, A)
+#' res <- calc_phiA(my_design, theta, peleg, 0, A)
 #' res
-#' }
-#'
 #' @export
 
-calc_phiD <- function(design, FUN, tt, A, theta){
+calc_phiD <- function(design, theta, FUN, tt, A){
   u <- design$location
   w_hat <- design$weight
   N <- length(u)
