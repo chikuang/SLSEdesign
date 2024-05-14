@@ -25,17 +25,30 @@ devtools::install_github("chikuang/SLSEdesign")
 
 ## Examples
 
-1. Calculate the D-optimal design for the Peleg model:
+1. Calculate the D-optimal design for the 3rd order polynomial regression model:
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
+$$
 
 ```r
-peleg <- function(xi, theta){
-  deno <- (theta[1] + xi * theta[2])^2
-  rbind(-xi/deno, -xi^2/deno)
+poly3 <- function(xi,theta){
+    matrix(c(1, xi, xi^2, xi^3), ncol = 1)
 }
-my_design <- Dopt(N = 31, u = seq(0, 180, length.out = 31), tt = 0, FUN = peleg,
-                  theta = c(0.05, 0.5), num_iter = 500)
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0, FUN = poly3, theta = rep(1, 4), num_iter = 500)
 my_design$design
 my_design$val
+```
+
+Add equivalence theorem plot for D-optimal design:
+
+```r
+design = data.frame(location = c(-1, -0.447, 0.447, 1),
+ weight = rep(0.25, 4))
+u = seq(-1, 1, length.out = 201)
+plot_direction_Dopt(u, design, tt=0, FUN = poly3,
+  theta = rep(0, 4))
 ```
 
 ## TODO
