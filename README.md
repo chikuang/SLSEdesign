@@ -2,7 +2,7 @@
 
 *Chi-Kuang Yeh, Julie Zhou*
 
-*May 13, 2024*
+*May 14, 2024*
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
@@ -50,6 +50,7 @@ u = seq(-1, 1, length.out = 201)
 plot_direction_Dopt(u, design, tt=0, FUN = poly3,
   theta = rep(0, 4))
 ```
+<img src="man/fig/README-demo-equivalence.png" width="50%" />
 
 ## TODO
 
