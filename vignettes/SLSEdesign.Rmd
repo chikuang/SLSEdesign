@@ -1,17 +1,14 @@
 ---
-title: "Optimal Design under Second-order Least Squares Estimator"
+title: "SLSEdesign"
+subtitle: "Optimal Design under Second-order Least Squares Estimator"
 author: | 
   | Chi-Kuang Yeh and Julie Zhou
   | University of Waterloo and University of Victoria
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_document:
-    toc: yes
-    toc_float: true
-    theme: readable
-    highlight: tango
   rmarkdown::html_vignette:
-    toc: yes
+    toc: true
+    fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{SLSEdesign}
   %\VignetteEncoding{UTF-8}

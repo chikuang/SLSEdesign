@@ -7,3 +7,5 @@ vignettes/*.html
 vignettes/*.R
 
 inst/doc/*.html
+/doc/
+/Meta/
