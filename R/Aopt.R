@@ -16,7 +16,7 @@
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' poly1 <- function(xi, theta){
 #'   matrix(c(1, xi), ncol = 1)
 #' }

@@ -8,3 +8,4 @@
 ^Meta$
 ^codecov\.yml$
 ^\.covrignore$
+^\.gitignore\.md$
