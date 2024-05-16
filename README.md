@@ -7,7 +7,7 @@
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/chikuang/SLSEdesign/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chikuang/SLSEdesign?branch=master)
+<!-- [![Codecov test coverage](https://codecov.io/gh/chikuang/SLSEdesign/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chikuang/SLSEdesign?branch=master) -->
 <!-- badges: end -->
 
 ---
