@@ -8,8 +8,10 @@ estimator
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/SLSEdesign?color=brightgreen)](https://CRAN.R-project.org/package=SLSEdesign)
+status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
+[![CRAN download](http://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
+[![](https://img.shields.io/github/languages/code-size/chikuang/SLSEdesign.svg)](https://github.com/chikuang/SLSEdesign)
 <!-- badges: end -->
 
 ## Description
