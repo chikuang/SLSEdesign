@@ -7,6 +7,8 @@ date: "*`r format(Sys.time(), '%B %d, %Y')`*"
 output: github_document
 ---
 
+\newcommand{\cov}{\mathbb{c}cov}
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -48,7 +50,8 @@ $\mathbf{\theta} \in \mathbb{R}^q$ is the unknown regression parameter vector,
 response function $\eta(\mathbf{x}_i, \mathbf{\theta})$   can be a linear or nonlinear
 function of $\mathbf{\theta}$, and the errors $\epsilon_i$ are assumed to be uncorrelated with mean zero and finite variance $\sigma^2$.
 
-Let $\hat{\mathbf{\theta}}$ be an estimator of $\mathbf{\theta}$, such as the least squares estimator. Various optimal designs are defined by minimizing $\phi\left\( \mathbb{c}ov(\hat{\mathbf{\theta}}) \right\)$ over the design points
+Let $\hat{\mathbf{\theta}}$ be an estimator of $\mathbf{\theta}$, such as the least squares estimator. Various optimal designs are defined by minimizing $\phi \left( \mathbb{c}ov(\hat{\mathbf{\theta}}) \right)$
+over the design points
 $\mathbf{x}_1, \ldots, \mathbf{x}_n$, where function $\phi(\cdot)$  can be determinant, trace, or other scalar functions. The resulting designs are called optimal exact designs (OEDs), which depend on the response function $\eta(\cdot,\cdot)$, the design space $S$, the estimator $\hat{\mathbf{\theta}}$, the scalar function $\phi(\cdot)$, and the number of points $n$.
 
 Second order least-squares estimator is defined as

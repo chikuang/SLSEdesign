@@ -1,4 +1,4 @@
-SLSEDesign:Optimal designs using the second-order Least squares
+SLSEDesign: Optimal designs using the second-order Least squares
 estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
@@ -49,7 +49,7 @@ to be uncorrelated with mean zero and finite variance $\sigma^2$.
 
 Let $\hat{\mathbf{\theta}}$ be an estimator of $\mathbf{\theta}$, such
 as the least squares estimator. Various optimal designs are defined by
-minimizing $\phi\left\( \mathbb{c}ov(\hat{\mathbf{\theta}}) \right\)$
+minimizing $\phi \left( \mathbb{c}ov(\hat{\mathbf{\theta}}) \right)$
 over the design points $\mathbf{x}_1, \ldots, \mathbf{x}_n$, where
 function $\phi(\cdot)$ can be determinant, trace, or other scalar
 functions. The resulting designs are called optimal exact designs
