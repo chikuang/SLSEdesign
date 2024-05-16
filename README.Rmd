@@ -3,7 +3,7 @@ title: "SLSEDesign:Optimal designs using the second-order Least squares estimato
 author: |
   | *Chi-Kuang Yeh, Julie Zhou*
   | 
-date: "*`r format(Sys.time(), '%d %B, %Y')`*"
+date: "*`r format(Sys.time(), '%B %d, %Y')`*"
 output: github_document
 ---
 

@@ -3,7 +3,7 @@ estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
 
-*16 May, 2024*
+*May 16, 2024*
 
 <!-- badges: start -->
 
