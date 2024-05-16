@@ -1,7 +1,7 @@
 ^SLSEdesign\.Rproj$
 ^\.Rproj\.user$
 ^doc
-^README.md
+^README\.md
 ^\.github$
 ^CRAN-SUBMISSION$
 ^doc$
@@ -9,3 +9,4 @@
 ^codecov\.yml$
 ^\.covrignore$
 ^\.gitignore\.md$
+^README\.Rmd
