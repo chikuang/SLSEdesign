@@ -18,10 +18,16 @@ This is a package to compute the optimal regression design under the second-orde
 
 ## Installation
 
-SLSEdesign is available in Python, Julia and R. To install in R:
+SLSEdesign is now available on [CRAN](https://cran.r-project.org/). Hence you may install it by typing
 
 ```r
-devtools::install_github("chikuang/SLSEdesign")
+install.packages("SLSEdesign")
+```
+
+or you may download the develop version by typing
+
+```r
+remotes::install_github("chikuang/SLSEdesign")
 ```
 
 ## Examples
@@ -59,7 +65,9 @@ plot_direction_Dopt(u, design, tt=0, FUN = poly3,
 + [x] Add files in inst/doc/ folder
 + [x] Add examples to all the exported functions to fulfill the requirement of CRAN
 + [x] Add information matrices in the examples within the calc_directional_derivatives functions
-+ [ ] Upload the package to CRAN
++ [x] Upload the package to CRAN
++ [ ] Python and Julia version of the package, which are expected to be faster than in R
++ [ ] Merge the functions that compute the directional derivatives. Maybe adding an extra argument to indicate the design criterion used.
 
 ## Reference 
 
