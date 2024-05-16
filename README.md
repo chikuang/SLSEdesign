@@ -1,4 +1,4 @@
-SLSEDesign:Optimal designs using the second-order Least squares
+SLSEDesign: Optimal designs using the second-order Least squares
 estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
@@ -8,7 +8,7 @@ estimator
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
+status](https://www.r-pkg.org/badges/version/SLSEdesign?color=brightgreen)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
