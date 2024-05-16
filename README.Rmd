@@ -1,5 +1,5 @@
 ---
-title: "SLSEDesign:Optimal designs using the second-order Least squares estimator"
+title: "SLSEDesign: Optimal designs using the second-order Least squares estimator"
 author: |
   | *Chi-Kuang Yeh, Julie Zhou*
   | 
