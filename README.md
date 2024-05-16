@@ -2,7 +2,7 @@
 
 *Chi-Kuang Yeh, Julie Zhou*
 
-*May 14, 2024*
+*May 16, 2024*
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/SLSEdesign?)](https://CRAN.R-project.org/package=SLSEdesign)
