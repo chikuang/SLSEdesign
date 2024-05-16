@@ -1,4 +1,4 @@
-SLSEDesign: Optimal designs using the second-order Least squares
+SLSEDesign:Optimal designs using the second-order Least squares
 estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
@@ -10,7 +10,12 @@ estimator
 [![CRAN
 status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
+<<<<<<< Updated upstream
 [![CRAN download](http://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
+=======
+[![CRAN
+download](http://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
+>>>>>>> Stashed changes
 [![](https://img.shields.io/github/languages/code-size/chikuang/SLSEdesign.svg)](https://github.com/chikuang/SLSEdesign)
 <!-- badges: end -->
 
@@ -33,6 +38,56 @@ or you may download the develop version by typing
 ``` r
 remotes::install_github("chikuang/SLSEdesign")
 ```
+
+## Details
+
+Consider a general regression model,
+$$y_i=\eta(\mathbf{x}_i, \mathbf{\theta})+ \epsilon_i, \quad i=1, \ldots, n,$$
+where $y_i$ is the $i$-th observation of a response variable $y$ at
+design point $\mathbf{x}_i \in S \subset \mathbb{R}^p$, $S$ is a design
+space, $\mathbf{\theta} \in \mathbb{R}^q$ is the unknown regression
+parameter vector, response function
+$\eta(\mathbf{x}_i, \mathbf{\theta})$ can be a linear or nonlinear
+function of $\mathbf{\theta}$, and the errors $\epsilon_i$ are assumed
+to be uncorrelated with mean zero and finite variance $\sigma^2$.
+
+Let $\hat{\mathbf{\theta}}$ be an estimator of $\mathbf{\theta}$, such
+as the least squares estimator. Various optimal designs are defined by
+minimizing $\phi\left\( \mathbb{c}ov(\hat{\mathbf{\theta}}) \right\)$
+over the design points $\mathbf{x}_1, \ldots, \mathbf{x}_n$, where
+function $\phi(\cdot)$ can be determinant, trace, or other scalar
+functions. The resulting designs are called optimal exact designs
+(OEDs), which depend on the response function $\eta(\cdot,\cdot)$, the
+design space $S$, the estimator $\hat{\mathbf{\theta}}$, the scalar
+function $\phi(\cdot)$, and the number of points $n$.
+
+Second order least-squares estimator is defined as
+
+``` math
+(\boldsymbol{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\boldsymbol{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
+y_i-\eta(\boldsymbol{x}_i;\boldsymbol{\theta})\\
+y_i^2-\eta^2(\boldsymbol{x}_i;\boldsymbol{\theta})-\sigma^2
+\end{pmatrix}^\top W(\boldsymbol{x_i}) \begin{pmatrix}
+y_i-\eta(\boldsymbol{x_i};\boldsymbol{\theta})\\
+y_i^2-\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})-\sigma^2
+\end{pmatrix}.
+```
+
+Note that $`W(\boldsymbol{x_i})`$ is a $`2\times 2`$ non-negative
+semi-definite matrix which may or may not depend on $\boldsymbol{x_i}$
+and Leblanc (2008). It is clear that SLSE is a natural extension of the
+OLSE which is defined based on the first-order difference function
+(i.e. $`y_i-\mathbb{E}[y_i]=y_i-\eta(\boldsymbol{x_i};\boldsymbol{\theta})`$).
+On the other hand, SLSE is defined using not only the first-order
+difference function, but also second-order difference function
+(i.e. $`y_i^2-\mathbb{E}[y_i^2]=y_i^2-(\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})+\sigma^2))`$.
+One might think about the downsides of the SLSE after talking about the
+advantages of SLSE over OLSE. SLSE does have its disadvantages indeed.
+It is not a linear estimator and there is no closed-form solution. It
+requires more computational resources compared to the OLSE due to the
+nonlinearity. However, numerical results can be easily computed for SLSE
+nowadays. As a result, SLSE is a powerful alternative estimator to be
+considered in research studies and real-life applications.
 
 ## Examples
 
