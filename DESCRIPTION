@@ -17,7 +17,8 @@ RoxygenNote: 7.3.1
 Imports: 
     CVXR,
     tibble,
-    graphics
+    graphics,
+    pracma
 Suggests: 
     knitr,
     rmarkdown,
