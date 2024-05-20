@@ -9,3 +9,6 @@ vignettes/*.R
 inst/doc/*.html
 /doc/
 /Meta/
+
+
+vignettes/SLSEdesign_cache/
