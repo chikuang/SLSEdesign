@@ -46,7 +46,7 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
   B <- rbind(cbind(1, sqrt(tt) * t(g1)),
              cbind(sqrt(tt) * g1, G2))
 
-  C <-  rbind(matrix(0, nrow =1, ncol = n), diag(1, n))
+  C <-  rbind(matrix(0, nrow =1, ncol = n), base::diag(1, n))
 
   for(k in 1:n){
     obj_val <- obj_val + CVXR::matrix_frac(C[, k], B)

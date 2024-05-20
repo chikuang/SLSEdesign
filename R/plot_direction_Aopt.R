@@ -9,6 +9,7 @@
 #' @details This function produces the figure for the directional derivative of the given A-optimal design of the compact supports. According to the general equivalence theorem, for an optimal design, all the negative value of the directional derivative should be below zero line.
 #'
 #' @import CVXR
+#' @importFrom pracma blkdiag
 #'
 #' @return The plot of the negative value of the directional derivative of an A-optimal design
 #'
@@ -43,7 +44,8 @@ plot_direction_Aopt <- function(u, design, tt, FUN, theta){
              cbind(sqt*g1, G2))
   BI <- solve(B)
 
-  C <-  rbind(matrix(0, nrow =1, ncol = n), diag(1, n))
+  # C <-  rbind(matrix(0, nrow =1, ncol = q), base::diag(1, q))
+  C <- pracma::blkdiag(matrix(0), diag(1, q))
   term <- sum(diag(C * BI * t(C)))
   # mini <- min(phi - q)
   ff <- function(x){
