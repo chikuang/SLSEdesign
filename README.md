@@ -32,7 +32,7 @@ install.packages("SLSEdesign")
 or you may download the develop version by typing
 
 ``` r
-remotes::install_github("chikuang/SLSEdesign")
+devtools::install_github("chikuang/SLSEdesign") # or pak::pkg_install("chikuang/SLSEdesign")
 ```
 
 ## Details
