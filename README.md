@@ -3,7 +3,7 @@ estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
 
-*May 20, 2024*
+*May 21, 2024*
 
 <!-- badges: start -->
 
@@ -69,21 +69,27 @@ y_i^2-\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})-\sigma^2
 \end{pmatrix}.
 ```
 
+### Comparison between ordinary least-squares and second order least-squares estimators
+
 Note that $`W(\boldsymbol{x_i})`$ is a $`2\times 2`$ non-negative
 semi-definite matrix which may or may not depend on $\boldsymbol{x_i}$
-and Leblanc (2008). It is clear that SLSE is a natural extension of the
-OLSE which is defined based on the first-order difference function
+(Wang and Leblanc, 2008). It is clear that SLSE is a natural extension
+of the OLSE which is defined based on the first-order difference
+function
 (i.e. $`y_i-\mathbb{E}[y_i]=y_i-\eta(\boldsymbol{x_i};\boldsymbol{\theta})`$).
 On the other hand, SLSE is defined using not only the first-order
 difference function, but also second-order difference function
 (i.e. $`y_i^2-\mathbb{E}[y_i^2]=y_i^2-(\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})+\sigma^2))`$.
-One might think about the downsides of the SLSE after talking about the
-advantages of SLSE over OLSE. SLSE does have its disadvantages indeed.
-It is not a linear estimator and there is no closed-form solution. It
-requires more computational resources compared to the OLSE due to the
-nonlinearity. However, numerical results can be easily computed for SLSE
-nowadays. As a result, SLSE is a powerful alternative estimator to be
-considered in research studies and real-life applications.
+One might think about the downsides of SLSE after discussing its
+advantages over OLSE. SLSE does have its disadvantages. It is not a
+linear estimator, and there is no closed-form solution. It requires more
+computational resources compared to OLSE due to its nonlinearity.
+However, numerical results can be easily computed for SLSE nowadays. As
+a result, SLSE is a powerful alternative estimator to be considered in
+research studies and real-life applications.
+
+In particular, if we set the skewness parameter $t$ to be zero, the
+resulting optimal designs under SLSE and OLSE **will be the same**!
 
 ## Examples
 
