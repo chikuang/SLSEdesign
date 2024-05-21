@@ -3,7 +3,7 @@ estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
 
-*May 16, 2024*
+*May 20, 2024*
 
 <!-- badges: start -->
 
@@ -32,7 +32,7 @@ install.packages("SLSEdesign")
 or you may download the develop version by typing
 
 ``` r
-remotes::install_github("chikuang/SLSEdesign")
+devtools::install_github("chikuang/SLSEdesign") # or pak::pkg_install("chikuang/SLSEdesign")
 ```
 
 ## Details
@@ -125,6 +125,8 @@ plot_direction_Dopt(u, design, tt=0, FUN = poly3,
 - [x] Add information matrices in the examples within the
   calc_directional_derivatives functions
 - [x] Upload the package to CRAN
+- [x] Update description
+- [x] Generate README.md file using RMarkdown
 - [ ] Python and Julia version of the package, which are expected to be
   faster than in R
 - [ ] Merge the functions that compute the directional derivatives.
