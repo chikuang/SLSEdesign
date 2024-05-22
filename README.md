@@ -124,14 +124,7 @@ plot_direction_Dopt(u, design, tt=0, FUN = poly3,
 
 ## TODO
 
-- [x] Add doi in the DESCRIPTION file
-- [x] Add files in inst/doc/ folder
-- [x] Add examples to all the exported functions to fulfill the
-  requirement of CRAN
-- [x] Add information matrices in the examples within the
-  calc_directional_derivatives functions
 - [x] Upload the package to CRAN
-- [x] Update description
 - [x] Generate README.md file using RMarkdown
 - [ ] Python and Julia version of the package, which are expected to be
   faster than in R
