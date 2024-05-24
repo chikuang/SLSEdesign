@@ -98,7 +98,9 @@ resulting optimal designs under SLSE and OLSE **will be the same**!
 
 $$
 y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
-$$ A partial derivative of the mean function is required:
+$$
+
+A partial derivative of the mean function is required:
 
 ``` r
 poly3 <- function(xi,theta){
@@ -153,6 +155,10 @@ plot_direction_Dopt(u, design, tt=0, FUN = poly3,
 
 #### D-optimal design of the 3rd order polynomial regression model without intercept
 
+$$
+y_i = \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
+$$
+
 In the last example, the support points did not change as `t` increases.
 However, it is not always the case, and. the optimal design may be
 depending on `t`.
@@ -161,10 +167,6 @@ depending on `t`.
 poly3_no_intercept <- function(xi, theta){
     matrix(c(xi, xi^2, xi^3), ncol = 1)
 }
-```
-
-``` r
-
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
      tt = 0, FUN = poly3_no_intercept, theta = rep(1, 3), num_iter = 500)
 my_design$design
@@ -190,8 +192,6 @@ my_design$val
 
 ## TODO
 
-- [x] Upload the package to CRAN
-- [x] Generate README.md file using RMarkdown
 - [ ] Python and Julia version of the package, which are expected to be
   faster than in R
 - [ ] Merge the functions that compute the directional derivatives.
