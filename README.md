@@ -3,7 +3,7 @@ estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
 
-*May 21, 2024*
+*May 24, 2024*
 
 <!-- badges: start -->
 
@@ -33,6 +33,7 @@ or you may download the develop version by typing
 
 ``` r
 devtools::install_github("chikuang/SLSEdesign") # or pak::pkg_install("chikuang/SLSEdesign")
+library(SLSEdesign)
 ```
 
 ## Details
@@ -93,21 +94,49 @@ resulting optimal designs under SLSE and OLSE **will be the same**!
 
 ## Examples
 
-1.  Calculate the D-optimal design for the 3rd order polynomial
-    regression model:
+#### D-optimal design of the 3rd order polynomial regression model
 
 $$
 y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
-$$
+$$ A partial derivative of the mean function is required:
 
 ``` r
 poly3 <- function(xi,theta){
     matrix(c(1, xi, xi^2, xi^3), ncol = 1)
 }
+```
+
+We first calculate the D-optimal design when the skewness parameter `t`
+is set to be zero. The resulting D-optimal design should be the same as
+the optimal design under the ordinary least-squares estimator.
+
+``` r
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
      tt = 0, FUN = poly3, theta = rep(1, 4), num_iter = 500)
 my_design$design
+#    location    weight
+# 1      -1.0 0.2615264
+# 10     -0.4 0.2373288
+# 22      0.4 0.2373288
+# 31      1.0 0.2615264
 my_design$val
+# 5.133616
+```
+
+Now we look at the situation when the skewness parameter `t` is in the
+interval (0, 1\], for instance, $0.7$.
+
+``` r
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0.7, FUN = poly3, theta = rep(1, 4), num_iter = 500)
+my_design$design
+#    location    weight
+# 1      -1.0 0.2714088
+# 10     -0.4 0.2287621
+# 22      0.4 0.2287621
+# 31      1.0 0.2714088
+my_design$val
+# 6.27293
 ```
 
 Add equivalence theorem plot for D-optimal design:
@@ -121,6 +150,43 @@ plot_direction_Dopt(u, design, tt=0, FUN = poly3,
 ```
 
 <img src="man/fig/README-demo-equivalence.png" width="50%" />
+
+#### D-optimal design of the 3rd order polynomial regression model without intercept
+
+In the last example, the support points did not change as `t` increases.
+However, it is not always the case, and. the optimal design may be
+depending on `t`.
+
+``` r
+poly3_no_intercept <- function(xi, theta){
+    matrix(c(xi, xi^2, xi^3), ncol = 1)
+}
+```
+
+``` r
+
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0, FUN = poly3_no_intercept, theta = rep(1, 3), num_iter = 500)
+my_design$design
+#    location    weight
+# 1      -1.0 0.3275005
+# 7      -0.6 0.1565560
+# 25      0.6 0.1565560
+# 31      1.0 0.3275005
+my_design$val
+# 3.651524
+
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0.9, FUN = poly3_no_intercept, theta = rep(1, 3), num_iter = 500)
+my_design$design
+#    location    weight
+# 1      -1.0 0.2888423
+# 10     -0.4 0.2096781
+# 22      0.4 0.2096781
+# 31      1.0 0.2888423
+my_design$val
+# 4.892601
+```
 
 ## TODO
 
