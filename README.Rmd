@@ -165,7 +165,8 @@ my_design$val
 ```
 
 ## TODO
-
++ [x] Fix the typo for A-optimality
++ [x] Version update for the develop version
 + [ ] Python and Julia version of the package, which are expected to be faster than in R
 + [ ] Merge the functions that compute the directional derivatives. Maybe adding an extra argument to indicate the design criterion used.
 
