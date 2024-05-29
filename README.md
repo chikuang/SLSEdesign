@@ -3,7 +3,7 @@ estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou*  
 
-*May 27, 2024*
+*May 29, 2024*
 
 <!-- badges: start -->
 
@@ -192,8 +192,9 @@ my_design$val
 
 ## TODO
 
-- [x] Fix the typo for A-optimality
 - [x] Version update for the develop version
+- [x] Improve the computational speed by vectorizing the code, and
+  remove loops
 - [ ] Python and Julia version of the package, which are expected to be
   faster than in R
 - [ ] Merge the functions that compute the directional derivatives.
