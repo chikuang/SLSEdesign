@@ -46,8 +46,9 @@ Dopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
   objective <- -CVXR::log_det(B)
   problem <- CVXR::Problem(CVXR::Minimize(objective),
                            constraints = my_constraints)
-  res <- CVXR::solve(problem, num_iter = num_iter)
-  res$getValue(w)
+  res <- CVXR::solve(problem, num_iter = num_iter,
+                     ignore_dcp = TRUE)
+
   # figure out the location of the design points
   tb <- data.frame(location = u,
                    weight = c(res$getValue(w)))

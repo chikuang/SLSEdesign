@@ -48,16 +48,15 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
 
   C <-  rbind(matrix(0, nrow =1, ncol = n), base::diag(1, n))
 
-  for(k in 1:n){
-    obj_val <- obj_val + CVXR::matrix_frac(C[, k], B)
-  }
+  obj_val <- CVXR::matrix_frac(C, B)
 
   my_constraints <- list(w >=0, sum(w) == 1)
 
   # Solve the optimization problem
   problem <- CVXR::Problem(CVXR::Minimize(obj_val),
                            constraints = my_constraints)
-  res <- CVXR::solve(problem, num_iter = num_iter)
+  res <- CVXR::solve(problem, num_iter = num_iter,
+                     ignore_dcp = TRUE)
 
   # figure out the location of the design points
   tb <- tibble(location = u,
