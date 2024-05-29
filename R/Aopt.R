@@ -10,7 +10,6 @@
 #' @details This function calculates the A-optimal design and the loss function under the A-optimality. The loss function under A-optimality is defined as the trace of the inverse of the Fisher information matrix
 #'
 #' @import CVXR
-#' @importFrom tibble tibble
 #'
 #' @return A list that contains 1. Value of the objective function at solution. 2. Status. 3. Optimal design
 #'
@@ -48,7 +47,7 @@ Aopt <- function(N, u, tt, FUN, theta, num_iter = 1000){
                      ignore_dcp = TRUE)
 
   # figure out the location of the design points
-  tb <- tibble(location = u,
+  tb <- data.frame(location = u,
                weight = c(res$getValue(w)))
   tb <- tb[tb$weight > 1E-2, ]
   list(val = res$value, status = res$status, design = tb)
