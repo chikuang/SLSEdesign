@@ -1,9 +1,9 @@
 SLSEDesign: Optimal designs using the second-order Least squares
 estimator
 ================
-*Chi-Kuang Yeh, Julie Zhou*  
+*Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*  
 
-*May 29, 2024*
+*May 30, 2024*
 
 <!-- badges: start -->
 
@@ -195,8 +195,8 @@ my_design$val
 - [x] Version update for the develop version
 - [x] Improve the computational speed by vectorizing the code, and
   remove loops
-- [x] Remove the unneccessary dependence: tibble, gridExtra, graphics
-  and stats
+- [x] Remove the unnecessary dependence: tibble, gridExtra, graphics and
+  stats
 - [ ] Python and Julia version of the package, which are expected to be
   faster than in R
 - [ ] Merge the functions that compute the directional derivatives.
