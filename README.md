@@ -3,7 +3,7 @@ estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*  
 
-*May 30, 2024*
+*June 06, 2024*
 
 <!-- badges: start -->
 
@@ -197,6 +197,7 @@ my_design$val
   remove loops
 - [x] Remove the unnecessary dependence: tibble, gridExtra, graphics and
   stats
+- [ ] Add c-optimality criterion
 - [ ] Python and Julia version of the package, which are expected to be
   faster than in R
 - [ ] Merge the functions that compute the directional derivatives.

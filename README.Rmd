@@ -168,6 +168,7 @@ my_design$val
 + [x] Version update for the develop version
 + [x] Improve the computational speed by vectorizing the code, and remove loops
 + [x] Remove the unnecessary dependence: tibble, gridExtra, graphics and stats
++ [ ] Add c-optimality criterion
 + [ ] Python and Julia version of the package, which are expected to be faster than in R
 + [ ] Merge the functions that compute the directional derivatives. Maybe adding an extra argument to indicate the design criterion used.
 
