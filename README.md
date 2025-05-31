@@ -3,7 +3,7 @@ estimator
 ================
 *Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*  
 
-*June 06, 2024*
+*May 31, 2025*
 
 <!-- badges: start -->
 
@@ -11,8 +11,7 @@ estimator
 status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
 [![CRAN
-download](https://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
-[![](https://cranlogs.r-pkg.org/badges/SLSEdesign)](https://cran.r-project.org/package=SLSEdesign)
+download](http://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
 [![](https://img.shields.io/github/languages/code-size/chikuang/SLSEdesign.svg)](https://github.com/chikuang/SLSEdesign)
 <!-- badges: end -->
 
@@ -61,15 +60,13 @@ function $\phi(\cdot)$, and the number of points $n$.
 
 Second order least-squares estimator is defined as
 
-``` math
-(\boldsymbol{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\boldsymbol{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
-y_i-\eta(\boldsymbol{x}_i;\boldsymbol{\theta})\\
+$$(\boldsymbol{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\boldsymbol{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
+y_i-\eta(\boldsymbol{x}_i;\boldsymbol{\theta}) & 
 y_i^2-\eta^2(\boldsymbol{x}_i;\boldsymbol{\theta})-\sigma^2
-\end{pmatrix}^\top W(\boldsymbol{x_i}) \begin{pmatrix}
+\end{pmatrix} W(\boldsymbol{x_i}) \begin{pmatrix}
 y_i-\eta(\boldsymbol{x_i};\boldsymbol{\theta})\\
 y_i^2-\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})-\sigma^2
-\end{pmatrix}.
-```
+\end{pmatrix}.$$
 
 ### Comparison between ordinary least-squares and second order least-squares estimators
 
@@ -97,9 +94,7 @@ resulting optimal designs under SLSE and OLSE **will be the same**!
 
 #### D-optimal design of the 3rd order polynomial regression model
 
-$$
-y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
-$$
+$$y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i$$
 
 A partial derivative of the mean function is required:
 
@@ -156,9 +151,7 @@ plot_direction_Dopt(u, design, tt=0, FUN = poly3,
 
 #### D-optimal design of the 3rd order polynomial regression model without intercept
 
-$$
-y_i = \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
-$$
+$$y_i = \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i$$
 
 In the last example, the support points did not change as `t` increases.
 However, it is not always the case, and. the optimal design may be
@@ -203,6 +196,7 @@ my_design$val
   faster than in R
 - [ ] Merge the functions that compute the directional derivatives.
   Maybe adding an extra argument to indicate the design criterion used.
+- [ ] Shiny App
 
 ## Reference
 

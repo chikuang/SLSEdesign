@@ -56,15 +56,16 @@ over the design points
 $\mathbf{x}_1, \ldots, \mathbf{x}_n$, where function $\phi(\cdot)$  can be determinant, trace, or other scalar functions. The resulting designs are called optimal exact designs (OEDs), which depend on the response function $\eta(\cdot,\cdot)$, the design space $S$, the estimator $\hat{\mathbf{\theta}}$, the scalar function $\phi(\cdot)$, and the number of points $n$.
 
 Second order least-squares estimator is defined as
-```math
+
+$$
 (\boldsymbol{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\boldsymbol{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
-y_i-\eta(\boldsymbol{x}_i;\boldsymbol{\theta})\\
+y_i-\eta(\boldsymbol{x}_i;\boldsymbol{\theta}) & 
 y_i^2-\eta^2(\boldsymbol{x}_i;\boldsymbol{\theta})-\sigma^2
-\end{pmatrix}^\top W(\boldsymbol{x_i}) \begin{pmatrix}
+\end{pmatrix} W(\boldsymbol{x_i}) \begin{pmatrix}
 y_i-\eta(\boldsymbol{x_i};\boldsymbol{\theta})\\
 y_i^2-\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})-\sigma^2
 \end{pmatrix}.
-```
+$$
 
 ### Comparison between ordinary least-squares and second order least-squares estimators
 
@@ -171,6 +172,7 @@ my_design$val
 + [ ] Add c-optimality criterion
 + [ ] Python and Julia version of the package, which are expected to be faster than in R
 + [ ] Merge the functions that compute the directional derivatives. Maybe adding an extra argument to indicate the design criterion used.
++ [ ] Shiny App
 
 ## Reference 
 
