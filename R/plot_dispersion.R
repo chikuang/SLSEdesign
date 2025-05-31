@@ -35,17 +35,15 @@ plot_dispersion <- function(u, design, tt, FUN, theta, criterion = "D") {
   N <- length(u)
   q <- length(theta)
   sqt <- sqrt(tt)
-  g1 <- matrix(0, ncol = 1, nrow = q)
-  G2 <- matrix(0, nrow = q, ncol = q)
+  x_star <- design$location
+  w_star <- design$weight
+  n <- length(theta)
 
-  # Compute moments from design
-  for (j in 1:nrow(design)) {
-    uj <- design$location[j]
-    wj <- design$weight[j]
-    f <- FUN(uj, theta)
-    g1 <- g1 + wj * f
-    G2 <- G2 + wj * tcrossprod(f)
-  }
+  C <-  rbind(0, diag(1, n))
+
+  multi_f <- sapply(x_star, FUN, theta)
+  g1 <- multi_f %*% w_star
+  G2 <- multi_f %*% diag(w_star) %*% t(multi_f)
 
   # Compute Fisher information matrix and its inverse
   B <- rbind(cbind(1, sqt * t(g1)),
