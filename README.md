@@ -11,7 +11,7 @@ estimator
 status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
 [![CRAN
-download](https://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
+download](http://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
 [![](https://img.shields.io/github/languages/code-size/chikuang/SLSEdesign.svg)](https://github.com/chikuang/SLSEdesign)
 <!-- badges: end -->
 
@@ -60,25 +60,24 @@ function $\phi(\cdot)$, and the number of points $n$.
 
 Second order least-squares estimator is defined as
 
-$$(\boldsymbol{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\boldsymbol{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
-y_i-\eta(\boldsymbol{x}_i;\boldsymbol{\theta}) & 
-y_i^2-\eta^2(\boldsymbol{x}_i;\boldsymbol{\theta})-\sigma^2
-\end{pmatrix} W(\boldsymbol{x_i}) \begin{pmatrix}
-y_i-\eta(\boldsymbol{x_i};\boldsymbol{\theta})\\
-y_i^2-\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})-\sigma^2
+$$(\mathbf{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\mathbf{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
+y_i-\eta(\mathbf{x}_i;\mathbf{\theta}) & 
+y_i^2-\eta^2(\mathbf{x}_i;\mathbf{\theta})-\sigma^2
+\end{pmatrix} W(\mathbf{x}_i) \begin{pmatrix}
+y_i-\eta(\mathbf{x}_i;\mathbf{\theta})\\
+y_i^2-\eta^2(\mathbf{x}_i;\mathbf{\theta})-\sigma^2
 \end{pmatrix}.$$
 
 ### Comparison between ordinary least-squares and second order least-squares estimators
 
-Note that $`W(\boldsymbol{x_i})`$ is a $`2\times 2`$ non-negative
-semi-definite matrix which may or may not depend on $\boldsymbol{x_i}$
-(Wang and Leblanc, 2008). It is clear that SLSE is a natural extension
-of the OLSE which is defined based on the first-order difference
-function
-(i.e. $`y_i-\mathbb{E}[y_i]=y_i-\eta(\boldsymbol{x_i};\boldsymbol{\theta})`$).
+Note that $`W(\mathbf{x}_i)`$ is a $`2\times 2`$ non-negative
+semi-definite matrix which may or may not depend on $\mathbf{x}_i$ (Wang
+and Leblanc, 2008). It is clear that SLSE is a natural extension of the
+OLSE which is defined based on the first-order difference function
+(i.e. $`y_i-\mathbb{E}[y_i]=y_i-\eta(\mathbf{x}_i;\mathbf{\theta})`$).
 On the other hand, SLSE is defined using not only the first-order
 difference function, but also second-order difference function
-(i.e. $`y_i^2-\mathbb{E}[y_i^2]=y_i^2-(\eta^2(\boldsymbol{x_i};\boldsymbol{\theta})+\sigma^2))`$.
+(i.e. $`y_i^2-\mathbb{E}[y_i^2]=y_i^2-(\eta^2(\mathbf{x_i};\mathbf{\theta})+\sigma^2))`$.
 One might think about the downsides of SLSE after discussing its
 advantages over OLSE. SLSE does have its disadvantages. It is not a
 linear estimator, and there is no closed-form solution. It requires more
