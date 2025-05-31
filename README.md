@@ -77,7 +77,7 @@ OLSE which is defined based on the first-order difference function
 (i.e. $`y_i-\mathbb{E}[y_i]=y_i-\eta(\mathbf{x}_i;\mathbf{\theta})`$).
 On the other hand, SLSE is defined using not only the first-order
 difference function, but also second-order difference function
-(i.e. $`y_i^2-\mathbb{E}[y_i^2]=y_i^2-(\eta^2(\mathbf{x_i};\mathbf{\theta})+\sigma^2))`$.
+(i.e. $`y_i^2-\mathbb{E}[y_i^2]=y_i^2-(\eta^2(\mathbf{x}_i;\mathbf{\theta})+\sigma^2))`$.
 One might think about the downsides of SLSE after discussing its
 advantages over OLSE. SLSE does have its disadvantages. It is not a
 linear estimator, and there is no closed-form solution. It requires more
@@ -142,8 +142,8 @@ Add equivalence theorem plot for D-optimal design:
 design = data.frame(location = c(-1, -0.447, 0.447, 1),
  weight = rep(0.25, 4))
 u = seq(-1, 1, length.out = 201)
-plot_direction_Dopt(u, design, tt=0, FUN = poly3,
-  theta = rep(0, 4))
+plot_dispersion(u, design, tt = 0, FUN = poly3,
+  theta = rep(0, 4), criterion = "D")
 ```
 
 <img src="man/fig/README-demo-equivalence.png" width="50%" />
@@ -193,7 +193,7 @@ my_design$val
 - [ ] Add c-optimality criterion
 - [ ] Python and Julia version of the package, which are expected to be
   faster than in R
-- [ ] Merge the functions that compute the directional derivatives.
+- [x] Merge the functions that compute the directional derivatives.
   Maybe adding an extra argument to indicate the design criterion used.
 - [ ] Shiny App
 
