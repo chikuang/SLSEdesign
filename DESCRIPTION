@@ -22,5 +22,5 @@ Imports:
     CVXR
 Suggests: 
     knitr,
-    rmarkdownw
+    rmarkdown
 VignetteBuilder: knitr
