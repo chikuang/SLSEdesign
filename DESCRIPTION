@@ -1,6 +1,6 @@
 Package: SLSEdesign
 Title: Optimal Regression Design under the Second-Order Least Squares Estimator
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: 
     c(person(given = "Chi-Kuang", family = "Yeh",
              role = c("aut", "cre"),
