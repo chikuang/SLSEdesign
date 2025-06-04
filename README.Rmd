@@ -168,12 +168,13 @@ my_design$val
 
 ## TODO
 + [x] Version update for the develop version
-+ [x] Improve the computational speed by vectorizing the code, and remove loops
-+ [x] Remove the unnecessary dependence: tibble, gridExtra, graphics and stats
-+ [ ] Add c-optimality criterion
-+ [ ] Python and Julia version of the package, which are expected to be faster than in R
++ [x] Add c-optimality criterion
 + [x] Merge the functions that compute the directional derivatives. Maybe adding an extra argument to indicate the design criterion used.
++ [ ] Improve the computational speed by vectorizing the code, and remove loops
++ [ ] Merge the functions that compute the optimal designs under A-, c-, and D-optimality, namely the *copt*, *Dopt*, and *Aopt* functions
++ [ ] Python and Julia version of the package, which are expected to be faster than in R
 + [ ] Shiny App
++ [ ] Write a package page to further explain the utility of the package
 
 ## Reference 
 
