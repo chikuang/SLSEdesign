@@ -1,5 +1,7 @@
 SLSEDesign: Optimal designs using the second-order Least squares
 estimator ================ *Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*  
+Georgia State University, University of Victoria and University of
+Waterloo
 
 *March 06, 2026*
 
