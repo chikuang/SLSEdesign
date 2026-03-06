@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SLSEdesign</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Aopt</span><span class="op">(</span><span class="va">N</span>, <span class="va">u</span>, <span class="va">tt</span>, <span class="va">FUN</span>, <span class="va">theta</span>, num_iter <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Aopt</span><span class="op">(</span><span class="va">N</span>, <span class="va">u</span>, <span class="va">tt</span>, <span class="va">FUN</span>, <span class="va">theta</span>, show_cvxr_status <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -66,8 +66,8 @@
 <dd><p>The parameter value of the model.</p></dd>
 
 
-<dt id="arg-num-iter">num_iter<a class="anchor" aria-label="anchor" href="#arg-num-iter"></a></dt>
-<dd><p>Maximum number of iteration.</p></dd>
+<dt id="arg-show-cvxr-status">show_cvxr_status<a class="anchor" aria-label="anchor" href="#arg-show-cvxr-status"></a></dt>
+<dd><p>A boolean variable to indicate whether to show the status of the CVXR optimization. By default, it is set to FALSE.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -86,53 +86,15 @@
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="va">Npt</span> <span class="op">&lt;-</span> <span class="fl">101</span></span></span>
 <span class="r-in"><span><span class="va">my_design</span> <span class="op">&lt;-</span> <span class="fu">Aopt</span><span class="op">(</span>N <span class="op">=</span> <span class="va">Npt</span>, u <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">+</span><span class="fl">1</span>, length.out <span class="op">=</span> <span class="va">Npt</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   tt <span class="op">=</span> <span class="fl">0</span>, FUN <span class="op">=</span> <span class="va">poly3</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span><span class="op">)</span>, num_iter <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span></span>
+<span class="r-in"><span>   tt <span class="op">=</span> <span class="fl">0</span>, FUN <span class="op">=</span> <span class="va">poly3</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">my_design</span><span class="op">$</span><span class="va">design</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     location weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      -1.00  0.161</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10     -0.82  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11     -0.80  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12     -0.78  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13     -0.76  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14     -0.74  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15     -0.72  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16     -0.70  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17     -0.68  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18     -0.66  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19     -0.64  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20     -0.62  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21     -0.60  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22     -0.58  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23     -0.56  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24     -0.54  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25     -0.52  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26     -0.50  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27     -0.48  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28     -0.46  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34     -0.34  0.308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68      0.34  0.308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74      0.46  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75      0.48  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76      0.50  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77      0.52  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78      0.54  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79      0.56  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80      0.58  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81      0.60  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82      0.62  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83      0.64  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84      0.66  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85      0.68  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86      0.70  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87      0.72  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88      0.74  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89      0.76  0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90      0.78  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91      0.80  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92      0.82  0.001</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101     1.00  0.161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      -1.00   0.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28     -0.46   0.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74      0.46   0.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101     1.00   0.15</span>
 <span class="r-in"><span><span class="va">my_design</span><span class="op">$</span><span class="va">val</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32.92169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 37.52534</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -144,7 +106,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

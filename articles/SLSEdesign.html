@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SLSEdesign</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,9 +54,9 @@
             <h3 data-toc-skip class="subtitle">Optimal Design under
 Second-order Least Squares Estimator</h3>
                         <h4 data-toc-skip class="author"><div class="line-block">Chi-Kuang Yeh and Julie Zhou<br>
-University of Waterloo and University of Victoria</div></h4>
+Georgia State University and University of Victoria</div></h4>
             
-            <h4 data-toc-skip class="date">2025-06-04</h4>
+            <h4 data-toc-skip class="date">2026-03-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/chikuang/SLSEdesign/blob/master/vignettes/SLSEdesign.Rmd" class="external-link"><code>vignettes/SLSEdesign.Rmd</code></a></small>
       <div class="d-none name"><code>SLSEdesign.Rmd</code></div>
@@ -76,9 +76,12 @@ University of Waterloo and University of Victoria</div></h4>
 <span><span class="co">#&gt; Loading required package: CVXR</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'CVXR'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     power</span></span></code></pre></div>
+<span><span class="co">#&gt;     power, sd, var</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     norm, outer</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="specify-the-input-for-the-program">Specify the input for the program<a class="anchor" aria-label="anchor" href="#specify-the-input-for-the-program"></a>
@@ -93,7 +96,7 @@ The parameter vector</p></li>
 derivatives of the given model</p></li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">21</span></span>
+<code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">101</span></span>
 <span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span></span>
@@ -111,26 +114,20 @@ derivatives of the given model</p></li>
 </h3>
 <p>Showing the optimal design and the support points</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res</span><span class="op">$</span><span class="va">design</span></span>
-<span><span class="co">#&gt;    location  weight</span></span>
-<span><span class="co">#&gt; 1      -1.0 0.17905</span></span>
-<span><span class="co">#&gt; 2      -0.9 0.00159</span></span>
-<span><span class="co">#&gt; 3      -0.8 0.00310</span></span>
-<span><span class="co">#&gt; 4      -0.7 0.00378</span></span>
-<span><span class="co">#&gt; 5      -0.6 0.00346</span></span>
-<span><span class="co">#&gt; 6      -0.5 0.00226</span></span>
-<span><span class="co">#&gt; 8      -0.3 0.30676</span></span>
-<span><span class="co">#&gt; 14      0.3 0.30676</span></span>
-<span><span class="co">#&gt; 16      0.5 0.00226</span></span>
-<span><span class="co">#&gt; 17      0.6 0.00346</span></span>
-<span><span class="co">#&gt; 18      0.7 0.00378</span></span>
-<span><span class="co">#&gt; 19      0.8 0.00310</span></span>
-<span><span class="co">#&gt; 20      0.9 0.00159</span></span>
-<span><span class="co">#&gt; 21      1.0 0.17905</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">res</span><span class="op">$</span><span class="va">val</span></span>
+<span><span class="co">#&gt; [1] 37.5</span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">status</span></span>
+<span><span class="co">#&gt; [1] "optimal"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">design</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     location weight</span></span>
+<span><span class="co">#&gt; 1      -1.00   0.15</span></span>
+<span><span class="co">#&gt; 28     -0.46   0.35</span></span>
+<span><span class="co">#&gt; 74      0.46   0.35</span></span>
+<span><span class="co">#&gt; 101     1.00   0.15</span></span></code></pre></div>
 <p>Or we can plot them</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_weight.html">plot_weight</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">design</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SLSEdesign_files/figure-html/weight-1.png" width="700"></p>
+<p><img src="SLSEdesign_files/figure-html/weight-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="plot-the-directional-derivative-to-use-the-equivalence-theorem-for-3rd-order-polynomial-models">Plot the directional derivative to use the equivalence theorem for
@@ -148,7 +145,7 @@ derivatives of the given model</p></li>
 <span><span class="va">u</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">201</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_dispersion.html">plot_dispersion</a></span><span class="op">(</span><span class="va">u</span>, <span class="va">design</span>, tt <span class="op">=</span> <span class="fl">0</span>, FUN <span class="op">=</span> <span class="va">poly3</span>,</span>
 <span>  theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span>, criterion <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SLSEdesign_files/figure-html/D-optimality-1.png" width="700"></p>
+<p><img src="SLSEdesign_files/figure-html/D-optimality-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="a-optimal-design">A-optimal design<a class="anchor" aria-label="anchor" href="#a-optimal-design"></a>
@@ -158,10 +155,11 @@ derivatives of the given model</p></li>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">xi</span>, <span class="va">xi</span><span class="op">^</span><span class="fl">2</span>, <span class="va">xi</span><span class="op">^</span><span class="fl">3</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>location <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">0.464</span>, <span class="fl">0.464</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>                    weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.151</span>, <span class="fl">0.349</span>, <span class="fl">0.349</span>, <span class="fl">0.151</span><span class="op">)</span><span class="op">)</span></span>
+<span>                     weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.151</span>, <span class="fl">0.349</span>, <span class="fl">0.349</span>, <span class="fl">0.151</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">u</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">201</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/plot_dispersion.html">plot_dispersion</a></span><span class="op">(</span><span class="va">u</span>, <span class="va">design</span>, tt <span class="op">=</span> <span class="fl">0</span>, FUN <span class="op">=</span> <span class="va">poly3</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span><span class="op">)</span>, criterion <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SLSEdesign_files/figure-html/A-optimality-1.png" width="700"></p>
+<span><span class="fu"><a href="../reference/plot_dispersion.html">plot_dispersion</a></span><span class="op">(</span><span class="va">u</span>, <span class="va">design</span>, tt <span class="op">=</span> <span class="fl">0</span>, </span>
+<span>                FUN <span class="op">=</span> <span class="va">poly3</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">4</span><span class="op">)</span>, criterion <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SLSEdesign_files/figure-html/A-optimality-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 </div>
 <div class="section level3">
@@ -179,12 +177,16 @@ peleg model under c-optimality<a class="anchor" aria-label="anchor" href="#plot-
 <span><span class="va">my_cVec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">my_design</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/copt.html">copt</a></span><span class="op">(</span></span>
 <span>  N <span class="op">=</span> <span class="va">Npt</span>, u <span class="op">=</span> <span class="va">my_u</span>,</span>
-<span>  tt <span class="op">=</span> <span class="fl">0</span>, FUN <span class="op">=</span> <span class="va">my_peleg</span>, theta <span class="op">=</span> <span class="va">my_theta</span>, num_iter <span class="op">=</span> <span class="fl">50000</span>,</span>
+<span>  tt <span class="op">=</span> <span class="fl">0</span>, FUN <span class="op">=</span> <span class="va">my_peleg</span>, theta <span class="op">=</span> <span class="va">my_theta</span>,</span>
 <span>  cVec <span class="op">=</span> <span class="va">my_cVec</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Solution may be inaccurate. Try another solver, adjusting the solver settings,</span></span>
+<span><span class="co">#&gt; or solve with `verbose = TRUE` for more information.</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/plot_dispersion.html">plot_dispersion</a></span><span class="op">(</span><span class="va">my_u</span>, <span class="va">my_design</span><span class="op">$</span><span class="va">design</span>, tt <span class="op">=</span> <span class="fl">0</span>, FUN <span class="op">=</span> <span class="va">my_peleg</span>, theta <span class="op">=</span> <span class="va">my_theta</span>, criterion <span class="op">=</span> <span class="st">"c"</span>, cVec <span class="op">=</span> <span class="va">my_cVec</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SLSEdesign_files/figure-html/c-optimality-1.png" width="700"></p>
+<span><span class="fu"><a href="../reference/plot_dispersion.html">plot_dispersion</a></span><span class="op">(</span><span class="va">my_u</span>, <span class="va">my_design</span><span class="op">$</span><span class="va">design</span>, tt <span class="op">=</span> <span class="fl">0</span>, </span>
+<span>                FUN <span class="op">=</span> <span class="va">my_peleg</span>, theta <span class="op">=</span> <span class="va">my_theta</span>, </span>
+<span>                criterion <span class="op">=</span> <span class="st">"c"</span>, cVec <span class="op">=</span> <span class="va">my_cVec</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SLSEdesign_files/figure-html/c-optimality-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -198,7 +200,7 @@ peleg model under c-optimality<a class="anchor" aria-label="anchor" href="#plot-
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

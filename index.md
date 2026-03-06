@@ -1,0 +1,222 @@
+SLSEDesign: Optimal designs using the second-order Least squares
+estimator ================ *Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*  
+
+*March 06, 2026*
+
+## Description
+
+This is a package to compute the optimal regression design under the
+second-order Least squares estimator
+
+## Installation
+
+SLSEdesign is now available on [CRAN](https://cran.r-project.org/).
+Hence you may install it by typing
+
+``` r
+install.packages("SLSEdesign")
+```
+
+or you may download the develop version by typing
+
+``` r
+devtools::install_github("chikuang/SLSEdesign") # or pak::pkg_install("chikuang/SLSEdesign")
+library(SLSEdesign)
+```
+
+## Details
+
+Consider a general regression model,
+$$y_{i} = \eta\left( \mathbf{x}_{i},{\mathbf{θ}} \right) + \epsilon_{i},\quad i = 1,\ldots,n,$$
+where $y_{i}$ is the $i$-th observation of a response variable $y$ at
+design point $\mathbf{x}_{i} \in S \subset {\mathbb{R}}^{p}$, $S$ is a
+design space, ${\mathbf{θ}} \in {\mathbb{R}}^{q}$ is the unknown
+regression parameter vector, response function
+$\eta\left( \mathbf{x}_{i},{\mathbf{θ}} \right)$ can be a linear or
+nonlinear function of $\mathbf{θ}$, and the errors $\epsilon_{i}$ are
+assumed to be uncorrelated with mean zero and finite variance
+$\sigma^{2}$.
+
+Let $\widehat{\mathbf{θ}}$ be an estimator of $\mathbf{θ}$, such as the
+least squares estimator. Various optimal designs are defined by
+minimizing
+$\phi\left( {\mathbb{c}}ov\left( \widehat{\mathbf{θ}} \right) \right)$
+over the design points $\mathbf{x}_{1},\ldots,\mathbf{x}_{n}$, where
+function $\phi( \cdot )$ can be determinant, trace, or other scalar
+functions. The resulting designs are called optimal exact designs
+(OEDs), which depend on the response function $\eta( \cdot , \cdot )$,
+the design space $S$, the estimator $\widehat{\mathbf{θ}}$, the scalar
+function $\phi( \cdot )$, and the number of points $n$.
+
+Second order least-squares estimator is defined as
+
+$$\left( {\widehat{\mathbf{θ}}}^{\top},{\widehat{\sigma}}^{2} \right)^{\top}:=\underset{{\mathbf{θ}},\sigma^{2}}{argmin}\sum\limits_{i = 1}^{n}\begin{pmatrix}
+{y_{i} - \eta\left( \mathbf{x}_{i};{\mathbf{θ}} \right)} & {y_{i}^{2} - \eta^{2}\left( \mathbf{x}_{i};{\mathbf{θ}} \right) - \sigma^{2}}
+\end{pmatrix}W\left( \mathbf{x}_{i} \right)\begin{pmatrix}
+{y_{i} - \eta\left( \mathbf{x}_{i};{\mathbf{θ}} \right)} \\
+{y_{i}^{2} - \eta^{2}\left( \mathbf{x}_{i};{\mathbf{θ}} \right) - \sigma^{2}}
+\end{pmatrix}.$$
+
+### Comparison between ordinary least-squares and second order least-squares estimators
+
+Note that \$\`W(\mathbf{x}\_i)\`\$ is a \$\`2\times 2\`\$ non-negative
+semi-definite matrix which may or may not depend on $\mathbf{x}_{i}$
+(Wang and Leblanc, 2008). It is clear that SLSE is a natural extension
+of the OLSE which is defined based on the first-order difference
+function
+(i.e. \$\`y_i-\mathbb{E}\[y_i\]=y_i-\eta(\mathbf{x}\_i;\mathbf{\theta})\`\$).
+On the other hand, SLSE is defined using not only the first-order
+difference function, but also second-order difference function
+(i.e. \$\`y_i^2-\mathbb{E}\[y_i^2\]=y_i^2-(\eta^2(\mathbf{x}\_i;\mathbf{\theta})+\sigma^2))\`\$.
+One might think about the downsides of SLSE after discussing its
+advantages over OLSE. SLSE does have its disadvantages. It is not a
+linear estimator, and there is no closed-form solution. It requires more
+computational resources compared to OLSE due to its nonlinearity.
+However, numerical results can be easily computed for SLSE nowadays. As
+a result, SLSE is a powerful alternative estimator to be considered in
+research studies and real-life applications.
+
+In particular, if we set the skewness parameter $t$ to be zero, the
+resulting optimal designs under SLSE and OLSE **will be the same**!
+
+## Examples
+
+#### D-optimal design of the 3rd order polynomial regression model
+
+$$y_{i} = \beta_{0} + \beta_{1}x_{i} + \beta_{2}x_{i}^{2} + \beta_{3}x_{i}^{3} + \varepsilon_{i}$$
+
+A partial derivative of the mean function is required:
+
+``` r
+poly3 <- function(xi,theta){
+    matrix(c(1, xi, xi^2, xi^3), ncol = 1)
+}
+```
+
+We first calculate the D-optimal design when the skewness parameter `t`
+is set to be zero. The resulting D-optimal design should be the same as
+the optimal design under the ordinary least-squares estimator.
+
+``` r
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0, FUN = poly3, theta = rep(1, 4))
+my_design$design
+#    location    weight
+# 1      -1.0 0.2615264
+# 10     -0.4 0.2373288
+# 22      0.4 0.2373288
+# 31      1.0 0.2615264
+my_design$val
+# 5.133616
+```
+
+Now we look at the situation when the skewness parameter `t` is in the
+interval (0, 1\], for instance, $0.7$.
+
+``` r
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0.7, FUN = poly3, theta = rep(1, 4))
+my_design$design
+#    location    weight
+# 1      -1.0 0.2714088
+# 10     -0.4 0.2287621
+# 22      0.4 0.2287621
+# 31      1.0 0.2714088
+my_design$val
+# 6.27293
+```
+
+Add equivalence theorem plot for D-optimal design:
+
+``` r
+design = data.frame(location = c(-1, -0.447, 0.447, 1),
+ weight = rep(0.25, 4))
+u = seq(-1, 1, length.out = 201)
+plot_dispersion(u, design, tt = 0, FUN = poly3,
+  theta = rep(0, 4), criterion = "D")
+```
+
+![](man/fig/README-demo-equivalence.png)
+
+#### D-optimal design of the 3rd order polynomial regression model without intercept
+
+$$y_{i} = \beta_{1}x_{i} + \beta_{2}x_{i}^{2} + \beta_{3}x_{i}^{3} + \varepsilon_{i}$$
+
+In the last example, the support points did not change as `t` increases.
+However, it is not always the case, and. the optimal design may be
+depending on `t`.
+
+``` r
+poly3_no_intercept <- function(xi, theta){
+    matrix(c(xi, xi^2, xi^3), ncol = 1)
+}
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0, FUN = poly3_no_intercept, theta = rep(1, 3))
+my_design$design
+#    location    weight
+# 1      -1.0 0.3275005
+# 7      -0.6 0.1565560
+# 25      0.6 0.1565560
+# 31      1.0 0.3275005
+my_design$val
+# 3.651524
+
+my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
+     tt = 0.9, FUN = poly3_no_intercept, theta = rep(1, 3))
+my_design$design
+#    location    weight
+# 1      -1.0 0.2888423
+# 10     -0.4 0.2096781
+# 22      0.4 0.2096781
+# 31      1.0 0.2888423
+my_design$val
+# 4.892601
+```
+
+## TODO
+
+Version update for the develop version
+
+Add c-optimality criterion
+
+Merge the functions that compute the directional derivatives. Maybe
+adding an extra argument to indicate the design criterion used.
+
+Updated with respect to the new version to match with CVXR package,
+which now supports S7 objects as of version 1.8.1
+
+Improve the computational speed by vectorizing the code, and remove
+loops
+
+Merge the functions that compute the optimal designs under A-, c-, and
+D-optimality, namely the *copt*, *Dopt*, and *Aopt* functions
+
+Python and Julia version of the package, which are expected to be faster
+than in R
+
+Shiny App
+
+Write a package page to further explain the utility of the package
+
+## Reference
+
+1.  Gao, Lucy L. and Zhou, Julie. (2017). [D-optimal designs based on
+    the second-order least squares
+    estimator](https://link.springer.com/article/10.1007/s00362-015-0688-9).
+    *Statistical Papers*, 58, 77–94.
+2.  Gao, Lucy L. and Zhou, Julie. (2014). [New optimal design criteria
+    for regression models with asymmetric
+    errors](https://www.sciencedirect.com/science/article/pii/S037837581400007X).
+    *Journal of Statistical Planning and Inference*, 149, 140-151.
+3.  Wang, Liqun and Leblanc, Alexandre. (2008). [Second-order nonlinear
+    least squares
+    estimation](https://link.springer.com/article/10.1007/s10463-007-0139-z).
+    *Annals of the Institute of Statistical Mathematics*, 60, 883–900.
+4.  Yeh, Chi-Kuang and Zhou, Julie. (2021). [Properties of optimal
+    regression designs under the second-order least squares
+    estimator](https://link.springer.com/article/10.1007/s00362-018-01076-6).
+    *Statistical Papers*, 62, 75–92.
+5.  Yin, Yue and Zhou, Julie. (2017). [Optimal designs for regression
+    models using the second-order least squares
+    estimator](https://www.jstor.org/stable/26384103). *Statistica
+    Sinica*, 27, 1841-1856.
