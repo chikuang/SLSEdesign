@@ -94,7 +94,7 @@ We first calculate the D-optimal design when the skewness parameter `t` is set t
 
 ```r
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0, FUN = poly3, theta = rep(1, 4), num_iter = 500)
+     tt = 0, FUN = poly3, theta = rep(1, 4))
 my_design$design
 #    location    weight
 # 1      -1.0 0.2615264
@@ -109,7 +109,7 @@ Now we look at the situation when the skewness parameter `t` is in the interval 
 
 ```r
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0.7, FUN = poly3, theta = rep(1, 4), num_iter = 500)
+     tt = 0.7, FUN = poly3, theta = rep(1, 4))
 my_design$design
 #    location    weight
 # 1      -1.0 0.2714088
@@ -144,7 +144,7 @@ poly3_no_intercept <- function(xi, theta){
     matrix(c(xi, xi^2, xi^3), ncol = 1)
 }
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0, FUN = poly3_no_intercept, theta = rep(1, 3), num_iter = 500)
+     tt = 0, FUN = poly3_no_intercept, theta = rep(1, 3))
 my_design$design
 #    location    weight
 # 1      -1.0 0.3275005
@@ -155,7 +155,7 @@ my_design$val
 # 3.651524
 
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0.9, FUN = poly3_no_intercept, theta = rep(1, 3), num_iter = 500)
+     tt = 0.9, FUN = poly3_no_intercept, theta = rep(1, 3))
 my_design$design
 #    location    weight
 # 1      -1.0 0.2888423
@@ -170,6 +170,7 @@ my_design$val
 + [x] Version update for the develop version
 + [x] Add c-optimality criterion
 + [x] Merge the functions that compute the directional derivatives. Maybe adding an extra argument to indicate the design criterion used.
++ [x] Updated with respect to the new version to match with CVXR package, which now supports S7 objects as of version 1.8.1
 + [ ] Improve the computational speed by vectorizing the code, and remove loops
 + [ ] Merge the functions that compute the optimal designs under A-, c-, and D-optimality, namely the *copt*, *Dopt*, and *Aopt* functions
 + [ ] Python and Julia version of the package, which are expected to be faster than in R

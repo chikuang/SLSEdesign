@@ -1,9 +1,9 @@
 SLSEDesign: Optimal designs using the second-order Least squares
 estimator
 ================
-*Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*  
+*Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*\
 
-*June 04, 2025*
+*March 06, 2026*
 
 <!-- badges: start -->
 
@@ -61,13 +61,15 @@ function $\phi(\cdot)$, and the number of points $n$.
 
 Second order least-squares estimator is defined as
 
-$$(\mathbf{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\mathbf{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
+$$
+(\mathbf{\hat{\theta}}^\top,\hat{\sigma}^2)^\top:=\underset{\mathbf{\theta},\sigma^2}{\mathrm{argmin}}\sum_{i=1}^n \begin{pmatrix}
 y_i-\eta(\mathbf{x}_i;\mathbf{\theta}) & 
 y_i^2-\eta^2(\mathbf{x}_i;\mathbf{\theta})-\sigma^2
 \end{pmatrix} W(\mathbf{x}_i) \begin{pmatrix}
 y_i-\eta(\mathbf{x}_i;\mathbf{\theta})\\
 y_i^2-\eta^2(\mathbf{x}_i;\mathbf{\theta})-\sigma^2
-\end{pmatrix}.$$
+\end{pmatrix}.
+$$
 
 ### Comparison between ordinary least-squares and second order least-squares estimators
 
@@ -94,7 +96,9 @@ resulting optimal designs under SLSE and OLSE **will be the same**!
 
 #### D-optimal design of the 3rd order polynomial regression model
 
-$$y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i$$
+$$
+y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
+$$
 
 A partial derivative of the mean function is required:
 
@@ -110,7 +114,7 @@ the optimal design under the ordinary least-squares estimator.
 
 ``` r
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0, FUN = poly3, theta = rep(1, 4), num_iter = 500)
+     tt = 0, FUN = poly3, theta = rep(1, 4))
 my_design$design
 #    location    weight
 # 1      -1.0 0.2615264
@@ -126,7 +130,7 @@ interval (0, 1\], for instance, $0.7$.
 
 ``` r
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0.7, FUN = poly3, theta = rep(1, 4), num_iter = 500)
+     tt = 0.7, FUN = poly3, theta = rep(1, 4))
 my_design$design
 #    location    weight
 # 1      -1.0 0.2714088
@@ -151,7 +155,9 @@ plot_dispersion(u, design, tt = 0, FUN = poly3,
 
 #### D-optimal design of the 3rd order polynomial regression model without intercept
 
-$$y_i = \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i$$
+$$
+y_i = \beta_1 x_i + \beta_2 x_i^2 + \beta_3 x_i^3 +\varepsilon_i
+$$
 
 In the last example, the support points did not change as `t` increases.
 However, it is not always the case, and. the optimal design may be
@@ -162,7 +168,7 @@ poly3_no_intercept <- function(xi, theta){
     matrix(c(xi, xi^2, xi^3), ncol = 1)
 }
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0, FUN = poly3_no_intercept, theta = rep(1, 3), num_iter = 500)
+     tt = 0, FUN = poly3_no_intercept, theta = rep(1, 3))
 my_design$design
 #    location    weight
 # 1      -1.0 0.3275005
@@ -173,7 +179,7 @@ my_design$val
 # 3.651524
 
 my_design <- Dopt(N = 31, u = seq(-1, 1, length.out = 31), 
-     tt = 0.9, FUN = poly3_no_intercept, theta = rep(1, 3), num_iter = 500)
+     tt = 0.9, FUN = poly3_no_intercept, theta = rep(1, 3))
 my_design$design
 #    location    weight
 # 1      -1.0 0.2888423
@@ -190,6 +196,8 @@ my_design$val
 - [x] Add c-optimality criterion
 - [x] Merge the functions that compute the directional derivatives.
   Maybe adding an extra argument to indicate the design criterion used.
+- [x] Updated with respect to the new version to match with CVXR
+  package, which now supports S7 objects as of version 1.8.1
 - [ ] Improve the computational speed by vectorizing the code, and
   remove loops
 - [ ] Merge the functions that compute the optimal designs under A-, c-,
