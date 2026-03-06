@@ -2,7 +2,7 @@
 title: "SLSEDesign: Optimal designs using the second-order Least squares estimator"
 author: |
   | *Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*
-  | 
+  | Georgia State University, University of Victoria and University of Waterloo
 date: "*`r format(Sys.time(), '%B %d, %Y')`*"
 output: github_document
 ---
