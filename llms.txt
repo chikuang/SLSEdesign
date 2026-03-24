@@ -175,6 +175,49 @@ my_design$val
 # 4.892601
 ```
 
+## Peleg model
+
+``` r
+CVXR::exclude_solvers("MOSEK")
+peleg_grad <- function(xi, theta){
+  th1 <- theta[1]
+  th2 <- theta[2]
+  den <- (th1 + th2 * xi)^2
+
+  matrix(c(
+    -xi / den,
+    -xi^2 / den
+  ), ncol = 1)
+}
+u <- seq(0, 180, length.out = 1001)
+theta0 <- c(0.5, 0.05)
+
+res0 <- SLSEdesign::Dopt(
+  N = length(u),
+  u = u,
+  tt = 0,
+  FUN = peleg_grad,
+  theta = theta0
+)
+
+res0$design |> round(3)
+```
+
+``` R
+##      location weight
+## 51          9    0.5
+## 1001      180    0.5
+```
+
+``` r
+res0$val
+```
+
+``` R
+##          [,1]
+## [1,] 14.87739
+```
+
 ## TODO
 
 Version update for the develop version
