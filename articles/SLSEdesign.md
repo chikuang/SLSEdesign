@@ -120,8 +120,6 @@ my_design <- copt(
   tt = 0, FUN = my_peleg, theta = my_theta,
   cVec = my_cVec
 )
-#> Warning: Solution may be inaccurate. Try another solver, adjusting the solver settings,
-#> or solve with `verbose = TRUE` for more information.
 
 plot_dispersion(my_u, my_design$design, tt = 0, 
                 FUN = my_peleg, theta = my_theta, 

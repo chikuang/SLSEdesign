@@ -67,5 +67,5 @@ round(my_design$design, 3)
 #> 51         0    0.5
 #> 101        1    0.5
 my_design$val
-#> [1] 4.000021
+#> [1] 4
 ```
