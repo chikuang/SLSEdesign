@@ -29,34 +29,47 @@ Dopt <- function(N, u, tt, FUN, theta, show_cvxr_status = FALSE){
   n <- length(theta)
 
   w <- CVXR::Variable(N)
-  multi_f <- sapply(u, FUN, theta)
+
+  # each column is f(u_i, theta)
+  multi_f <- do.call(cbind, lapply(u, FUN, theta = theta))
+
   g1 <- multi_f %*% w
   G2 <- multi_f %*% CVXR::DiagVec(w) %*% t(multi_f)
-  # Set up constraints -------
 
   my_constraints <- list(w >= 0, sum(w) == 1)
 
   B <- CVXR::bmat(list(
     list(1, sqrt(tt) * t(g1)),
-    list(sqrt(tt) * g1,   G2)
+    list(sqrt(tt) * g1, G2)
   ))
 
-  # Solve
   objective <- -CVXR::log_det(B)
-  problem <- CVXR::Problem(CVXR::Minimize(objective),
-                           constraints = my_constraints)
-  res <- CVXR::psolve(problem,
-                      # solver = "SCS",
-                      verbose = show_cvxr_status,
-                      reltol = 1e-6,
-                      abstol = 1e-6)
 
-  # figure out the location of the design points
-  tb <- data.frame(location = u,
-                   weight = c(CVXR::value(w)))
-  tb <- tb[tb$weight > 1E-3, ]
-  # normalize the weights
-  tb[, "weight"] <- tb[, "weight"]/sum(tb[, "weight"])
-  list(val = res, status = CVXR::status(problem), design = tb)
+  problem <- CVXR::Problem(
+    CVXR::Minimize(objective),
+    constraints = my_constraints
+  )
+
+  res <- CVXR::psolve(
+    problem,
+    verbose = show_cvxr_status,
+    reltol = 1e-6,
+    abstol = 1e-6
+  )
+
+  tb <- data.frame(
+    location = u,
+    weight = c(CVXR::value(w))
+  )
+
+  tb <- tb[tb$weight > 1e-3, , drop = FALSE]
+  tb$weight <- tb$weight / sum(tb$weight)
+
+  list(
+    val = -CVXR::value(objective),
+    status = CVXR::status(problem),
+    design = tb,
+    weights = c(CVXR::value(w))
+  )
 }
 
