@@ -46,7 +46,7 @@ Dopt <- function(N, u, tt, FUN, theta, show_cvxr_status = FALSE){
   problem <- CVXR::Problem(CVXR::Minimize(objective),
                            constraints = my_constraints)
   res <- CVXR::psolve(problem,
-                      solver = "SCS",
+                      # solver = "SCS",
                       verbose = show_cvxr_status,
                       reltol = 1e-6,
                       abstol = 1e-6)
