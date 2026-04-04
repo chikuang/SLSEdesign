@@ -14,7 +14,6 @@ Jason Hou-Liu (University of Waterloo)
 status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
 [![](https://img.shields.io/github/languages/code-size/chikuang/SLSEdesign.svg)](https://github.com/chikuang/SLSEdesign)
-
 [![](https://cranlogs.r-pkg.org/badges/last-day/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
 [![](https://cranlogs.r-pkg.org/badges/SLSEdesign)](https://cran.r-project.org/package=SLSEdesign)
 [![CRAN
