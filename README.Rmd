@@ -1,8 +1,9 @@
 ---
 title: "SLSEDesign: Optimal designs using the second-order Least squares estimator"
 author: |
-  | *Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*
-  | Georgia State University, University of Victoria and University of Waterloo
+  | Chi-Kuang Yeh (Georgia State University) [![ORCID](https://img.shields.io/badge/ORCID-0000--0001--7057--2096-A6CE39?logo=orcid.png)](https://orcid.org/0000-0001-7057-2096)
+  | Julie Zhou (University of Victoria)
+  | Jason Hou-Liu (University of Waterloo)
 date: "*`r format(Sys.time(), '%B %d, %Y')`*"
 output: github_document
 ---
@@ -17,9 +18,13 @@ knitr::opts_chunk$set(echo = TRUE)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/SLSEdesign)](https://CRAN.R-project.org/package=SLSEdesign)
 [![R-CMD-check](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/chikuang/SLSEdesign/actions/workflows/R-CMD-check.yaml)
-[![CRAN download](http://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
-[![](https://cranlogs.r-pkg.org/badges/SLSEdesign)](https://cran.r-project.org/package=SLSEdesign)
 [![](https://img.shields.io/github/languages/code-size/chikuang/SLSEdesign.svg)](https://github.com/chikuang/SLSEdesign)
+
+
+[![](https://cranlogs.r-pkg.org/badges/last-day/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
+[![](https://cranlogs.r-pkg.org/badges/SLSEdesign)](https://cran.r-project.org/package=SLSEdesign)
+[![CRAN download](http://cranlogs.r-pkg.org/badges/grand-total/SLSEdesign?color=blue)](https://cran.r-project.org/package=SLSEdesign)
+
 <!-- badges: end -->
 
 
