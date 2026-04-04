@@ -1,9 +1,10 @@
 SLSEDesign: Optimal designs using the second-order Least squares
-estimator ================ *Chi-Kuang Yeh, Julie Zhou, Jason Hou-Liu*  
-Georgia State University, University of Victoria and University of
-Waterloo
+estimator ================ Chi-Kuang Yeh (Georgia State University)
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0001--7057--2096-A6CE39?logo=orcid.png)](https://orcid.org/0000-0001-7057-2096)  
+Julie Zhou (University of Victoria)  
+Jason Hou-Liu (University of Waterloo)
 
-*March 23, 2026*
+*April 04, 2026*
 
 ## Description
 
